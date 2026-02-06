@@ -52,7 +52,7 @@
       .deck {
         position: absolute;
         width: 1255px;
-        height: 650px;
+        height: 705px;
         top: 50%;
         left: 50%;
         transform-origin: center center;
@@ -71,7 +71,7 @@
         transition: opacity 0.5s cubic-bezier(0.4, 0, 0.2, 1);
         background: var(--bg);
         width: 1255px;
-        height: 650px;
+        height: 705px;
       }
       .slide.active {
         opacity: 1;
@@ -566,6 +566,37 @@
         height: 72px;
         opacity: 0.7;
         z-index: 10;
+      }
+
+      /* ─── DOWNLOAD BTN ─── */
+      .dl-btn {
+        position: fixed;
+        top: 16px;
+        right: 16px;
+        z-index: 1000;
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        background: rgba(30, 30, 30, 0.85);
+        backdrop-filter: blur(12px);
+        color: rgba(255, 255, 255, 0.8);
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        padding: 8px 18px;
+        border-radius: 8px;
+        font-size: 13px;
+        font-weight: 600;
+        font-family: inherit;
+        cursor: pointer;
+        transition: all 0.25s;
+      }
+      .dl-btn:hover {
+        background: rgba(37, 99, 235, 0.9);
+        color: #fff;
+        border-color: rgba(37, 99, 235, 0.6);
+      }
+      .dl-btn svg {
+        width: 16px;
+        height: 16px;
       }
 
       /* ─── SECTION LABEL ─── */
@@ -1608,6 +1639,24 @@
       </div>
     </div>
 
+    <!-- DOWNLOAD BTN -->
+    <button class="dl-btn" onclick="exportPPTX()">
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke="currentColor"
+        stroke-width="2"
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          d="M4 16v2a2 2 0 002 2h12a2 2 0 002-2v-2M7 10l5 5 5-5M12 15V3"
+        />
+      </svg>
+      Download PPTX
+    </button>
+
     <!-- NAV -->
     <div class="nav">
       <button onclick="go(-1)" aria-label="Previous">◀</button>
@@ -1621,7 +1670,7 @@
       const deck = document.getElementById('deck');
       function scaleDeck() {
         const sw = 1255,
-          sh = 650;
+          sh = 720;
         const vw = window.innerWidth,
           vh = window.innerHeight - 80; // 80px for nav
         const s = Math.min(vw / sw, vh / sh, 1); // never scale up past 1
@@ -1690,6 +1739,706 @@
           d > 0 ? go(1) : go(-1);
         }
       });
+    </script>
+    <script src="https://cdn.jsdelivr.net/gh/gitbrent/PptxGenJS@3.12.0/dist/pptxgen.bundle.js"></script>
+    <script>
+      async function exportPPTX() {
+        const pptx = new PptxGenJS();
+        pptx.layout = 'LAYOUT_WIDE'; // 13.33 x 7.5 in
+        pptx.author = 'BicCorp';
+        pptx.subject = 'FarmHUB Requirement';
+
+        const W = 13.33,
+          H = 7.5;
+        const BLUE = '2563EB',
+          GREEN = '059669',
+          ORANGE = 'D97706',
+          RED = 'DC2626',
+          PURPLE = '7C3AED';
+        const TEXT = '1A1D23',
+          TEXT2 = '5C6270',
+          TEXT3 = '8B91A0',
+          BG2 = 'F7F8FA',
+          BORDER = 'E2E5EB';
+
+        // ─── SLIDE 1: COVER ───
+        let s1 = pptx.addSlide();
+        s1.addShape(pptx.ShapeType.rect, {
+          x: 7.5,
+          y: 0,
+          w: 5.83,
+          h: H,
+          fill: { color: 'EEF0F4' },
+        });
+        s1.addText('🐷', {
+          x: 8.5,
+          y: 2.2,
+          w: 3,
+          h: 3,
+          fontSize: 96,
+          align: 'center',
+          valign: 'middle',
+        });
+        s1.addText('การนำเสนอสำหรับผู้บริหาร', {
+          x: 0.6,
+          y: 1.5,
+          w: 6,
+          h: 0.4,
+          fontSize: 11,
+          color: BLUE,
+          fontFace: 'Noto Sans Thai',
+        });
+        s1.addText('FarmHUB', {
+          x: 0.6,
+          y: 2.1,
+          w: 6,
+          h: 1,
+          fontSize: 48,
+          bold: true,
+          color: BLUE,
+          fontFace: 'Noto Sans Thai',
+        });
+        s1.addText('ระบบบริหารจัดการฟาร์มอัจฉริยะ', {
+          x: 0.6,
+          y: 3.2,
+          w: 6,
+          h: 0.6,
+          fontSize: 22,
+          color: TEXT2,
+          fontFace: 'Noto Sans Thai',
+        });
+        s1.addText(
+          'รวมทุกข้อมูลของฟาร์มไว้ในที่เดียว ตั้งแต่จัดซื้อ คลังสินค้า\nการเลี้ยง วัคซีน การขาย ไปจนถึงต้นทุน-กำไร',
+          {
+            x: 0.6,
+            y: 4.0,
+            w: 6,
+            h: 0.8,
+            fontSize: 14,
+            color: TEXT3,
+            fontFace: 'Noto Sans Thai',
+            lineSpacing: 22,
+          },
+        );
+        s1.addText('📅 6 กุมภาพันธ์ 2569', {
+          x: 0.6,
+          y: 5.2,
+          w: 3,
+          h: 0.4,
+          fontSize: 12,
+          color: TEXT3,
+          fontFace: 'Noto Sans Thai',
+        });
+
+        // ─── SLIDE 2: วัตถุประสงค์ ───
+        let s2 = pptx.addSlide();
+        s2.addText('วัตถุประสงค์และเป้าหมายของระบบ FarmHUB', {
+          x: 0.6,
+          y: 0.4,
+          w: 12,
+          h: 0.7,
+          fontSize: 28,
+          bold: true,
+          color: TEXT,
+          fontFace: 'Noto Sans Thai',
+        });
+
+        const objs = [
+          {
+            n: '1',
+            c: BLUE,
+            t: 'ยกระดับการบริหารฟาร์มให้เป็นระบบเดียว (Single Platform)',
+            d: 'รวมข้อมูลสำคัญตั้งแต่การซื้อ คลัง การเลี้ยง สุขภาพสัตว์ การซ่อมบำรุง การขาย และการเงิน',
+          },
+          {
+            n: '2',
+            c: GREEN,
+            t: 'ควบคุมมาตรฐานงานหน้างานและลดความผิดพลาด',
+            d: 'กำหนด Workflow ที่ชัดเจน ลดการตกหล่นข้อมูล เช่น ล็อต/วันหมดอายุวัคซีน',
+          },
+          {
+            n: '3',
+            c: ORANGE,
+            t: 'เพิ่มความโปร่งใส ตรวจสอบย้อนหลังได้ (Traceability & Audit)',
+            d: 'เก็บประวัติการทำรายการทุกขั้นตอน — ผู้ทำ / เวลา / สถานที่ / เอกสารแนบ',
+          },
+          {
+            n: '4',
+            c: RED,
+            t: 'ควบคุมสต็อกและต้นทุนได้แม่นยำ',
+            d: 'สต็อกแบบล็อต/วันหมดอายุ/คลังย่อย เชื่อมต้นทุนจริงต่อรุ่น/ต่อโรงเรือน/ต่อกก.',
+          },
+          {
+            n: '5',
+            c: PURPLE,
+            t: 'สนับสนุนการตัดสินใจด้วยข้อมูล (Data-driven)',
+            d: 'แดชบอร์ด อัตราตาย อัตราโต ต้นทุน/กก. กำไร/รุ่น ยอดขายรายวัน แจ้งเตือนอัตโนมัติ',
+          },
+        ];
+        objs.forEach((o, i) => {
+          const y = 1.4 + i * 1.15;
+          s2.addShape(pptx.ShapeType.roundRect, {
+            x: 0.6,
+            y,
+            w: 0.55,
+            h: 0.55,
+            rectRadius: 0.08,
+            fill: { color: o.c },
+          });
+          s2.addText(o.n, {
+            x: 0.6,
+            y,
+            w: 0.55,
+            h: 0.55,
+            fontSize: 14,
+            bold: true,
+            color: 'FFFFFF',
+            align: 'center',
+            valign: 'middle',
+            fontFace: 'Inter',
+          });
+          s2.addText(o.t, {
+            x: 1.35,
+            y: y - 0.02,
+            w: 11,
+            h: 0.35,
+            fontSize: 13,
+            bold: true,
+            color: TEXT,
+            fontFace: 'Noto Sans Thai',
+          });
+          s2.addText(o.d, {
+            x: 1.35,
+            y: y + 0.32,
+            w: 11,
+            h: 0.35,
+            fontSize: 11,
+            color: TEXT2,
+            fontFace: 'Noto Sans Thai',
+          });
+        });
+
+        // ─── SLIDE 3: ผู้ใช้งาน + ประโยชน์ ───
+        let s3 = pptx.addSlide();
+        s3.addText('ผู้ใช้งานระบบและประโยชน์สำหรับผู้บริหาร', {
+          x: 0.6,
+          y: 0.4,
+          w: 12,
+          h: 0.7,
+          fontSize: 28,
+          bold: true,
+          color: TEXT,
+          fontFace: 'Noto Sans Thai',
+        });
+        s3.addText('กลุ่มผู้ใช้งานระบบ', {
+          x: 0.6,
+          y: 1.2,
+          w: 5,
+          h: 0.35,
+          fontSize: 11,
+          bold: true,
+          color: TEXT3,
+          fontFace: 'Noto Sans Thai',
+        });
+
+        const users = [
+          {
+            ico: '🛡️',
+            t: 'ผู้ดูแลระบบ (Admin/IT)',
+            d: 'จัดการผู้ใช้ สิทธิ์ ตั้งค่าระบบ',
+          },
+          { ico: '👔', t: 'ผู้บริหาร', d: 'ดูภาพรวม KPI/รายงาน อนุมัติ' },
+          { ico: '🌾', t: 'ผู้จัดการฟาร์ม', d: 'คุมงาน วางแผน ติดตาม อนุมัติ' },
+          {
+            ico: '📋',
+            t: 'หัวหน้างาน',
+            d: 'จัดซื้อ คลัง ผลิต สัตวบาล ช่าง ขาย',
+          },
+          { ico: '👷', t: 'พนักงานปฏิบัติงาน', d: 'บันทึกงานจริงรายวัน' },
+          {
+            ico: '👁️',
+            t: 'ผู้ใช้งานภายนอก',
+            d: 'เข้าดูอย่างเดียว (Read-only)',
+          },
+        ];
+        users.forEach((u, i) => {
+          const y = 1.65 + i * 0.78;
+          s3.addShape(pptx.ShapeType.roundRect, {
+            x: 0.6,
+            y,
+            w: 5.5,
+            h: 0.65,
+            rectRadius: 0.1,
+            fill: { color: BG2 },
+            line: { color: BORDER, width: 0.5 },
+          });
+          s3.addText(u.ico, {
+            x: 0.75,
+            y,
+            w: 0.5,
+            h: 0.65,
+            fontSize: 16,
+            align: 'center',
+            valign: 'middle',
+          });
+          s3.addText(u.t, {
+            x: 1.35,
+            y: y + 0.05,
+            w: 4.5,
+            h: 0.3,
+            fontSize: 12,
+            bold: true,
+            color: TEXT,
+            fontFace: 'Noto Sans Thai',
+          });
+          s3.addText(u.d, {
+            x: 1.35,
+            y: y + 0.32,
+            w: 4.5,
+            h: 0.25,
+            fontSize: 10,
+            color: TEXT3,
+            fontFace: 'Noto Sans Thai',
+          });
+        });
+
+        s3.addText('ประโยชน์สำหรับผู้บริหาร', {
+          x: 7,
+          y: 1.2,
+          w: 5.5,
+          h: 0.35,
+          fontSize: 11,
+          bold: true,
+          color: TEXT3,
+          fontFace: 'Noto Sans Thai',
+        });
+        const bens = [
+          'เข้าถึงข้อมูลเชิงลึกได้ทันที — Dashboard KPI แบบ real-time ทุกฟาร์ม',
+          'ตัดสินใจได้อย่างแม่นยำ — มีรายงานและข้อมูลวิเคราะห์ครบถ้วน',
+          'ควบคุมต้นทุนได้อย่างมีประสิทธิภาพ — ต้นทุน/กก. ต้นทุน/ตัว ต้นทุน/รุ่น',
+          'เพิ่มความโปร่งใสและตรวจสอบได้ — Audit trail ทุกธุรกรรม',
+          'สนับสนุนการขยายธุรกิจ — เพิ่มสาขา/ฟาร์มใหม่ได้ง่าย รองรับ IoT',
+        ];
+        s3.addShape(pptx.ShapeType.roundRect, {
+          x: 7,
+          y: 1.65,
+          w: 5.8,
+          h: 5,
+          rectRadius: 0.12,
+          fill: { color: BG2 },
+          line: { color: BORDER, width: 0.5 },
+        });
+        bens.forEach((b, i) => {
+          const y = 1.85 + i * 0.85;
+          s3.addText('✔', {
+            x: 7.2,
+            y,
+            w: 0.4,
+            h: 0.4,
+            fontSize: 16,
+            color: GREEN,
+            align: 'center',
+            valign: 'top',
+          });
+          s3.addText(b, {
+            x: 7.6,
+            y: y + 0.02,
+            w: 4.9,
+            h: 0.7,
+            fontSize: 12,
+            color: TEXT2,
+            fontFace: 'Noto Sans Thai',
+            lineSpacing: 18,
+          });
+        });
+
+        // ─── SLIDE 4: โมดูลส่วน 1 ───
+        let s4 = pptx.addSlide();
+        s4.addText('โมดูลหลักของระบบ (ส่วนที่ 1)', {
+          x: 0.6,
+          y: 0.4,
+          w: 12,
+          h: 0.7,
+          fontSize: 28,
+          bold: true,
+          color: TEXT,
+          fontFace: 'Noto Sans Thai',
+        });
+
+        const mods1 = [
+          {
+            ico: '🔐',
+            c: BLUE,
+            t: 'พื้นฐานและข้อมูลหลัก',
+            items: [
+              'Master Data และข้อมูลตั้งต้น',
+              'ระบบยืนยันตัวตนและสิทธิ์ผู้ใช้',
+              'โครงสร้างสถานที่ (ฟาร์ม/โซน/โรงเรือน)',
+              'Audit Log เพื่อตรวจสอบย้อนหลัง',
+            ],
+          },
+          {
+            ico: '🛒',
+            c: GREEN,
+            t: 'การจัดซื้อ (Purchase Requests)',
+            items: [
+              'สร้างใบขอซื้อ (PR)',
+              'กระบวนการอนุมัติแบบหลายขั้น',
+              'ติดตามสถานะและประวัติ',
+              'เชื่อมโยงกับระบบคลัง',
+            ],
+          },
+          {
+            ico: '📦',
+            c: ORANGE,
+            t: 'คลังสินค้า (Warehouse)',
+            items: [
+              'รับเข้า – โอนย้าย – เบิกออก',
+              'จัดการ Lot / วันหมดอายุ',
+              'ติดตามสต็อกและ Traceability',
+              'ปรับปรุงสต็อกและตรวจนับ',
+            ],
+          },
+          {
+            ico: '🐷',
+            c: PURPLE,
+            t: 'การผลิต (Production)',
+            items: [
+              'เปิดรุ่นเลี้ยงและติดตาม Batch',
+              'การเคลื่อนย้ายระหว่างโรงเรือน',
+              'เบิกวัตถุดิบเพื่อการเลี้ยง',
+              'บันทึกการสูญเสียและน้ำหนัก',
+            ],
+          },
+        ];
+        mods1.forEach((m, i) => {
+          const col = i % 2,
+            row = Math.floor(i / 2);
+          const x = 0.6 + col * 6.2,
+            y = 1.4 + row * 2.9;
+          s4.addShape(pptx.ShapeType.roundRect, {
+            x,
+            y,
+            w: 5.9,
+            h: 2.6,
+            rectRadius: 0.12,
+            fill: { color: BG2 },
+            line: { color: BORDER, width: 0.5 },
+          });
+          s4.addShape(pptx.ShapeType.rect, {
+            x,
+            y,
+            w: 5.9,
+            h: 0.06,
+            fill: { color: m.c },
+          });
+          s4.addText(m.ico + ' ' + m.t, {
+            x: x + 0.3,
+            y: y + 0.15,
+            w: 5.3,
+            h: 0.45,
+            fontSize: 14,
+            bold: true,
+            color: TEXT,
+            fontFace: 'Noto Sans Thai',
+          });
+          m.items.forEach((item, j) => {
+            s4.addText('•  ' + item, {
+              x: x + 0.4,
+              y: y + 0.7 + j * 0.42,
+              w: 5,
+              h: 0.35,
+              fontSize: 11,
+              color: TEXT2,
+              fontFace: 'Noto Sans Thai',
+            });
+          });
+        });
+
+        // ─── SLIDE 5: โมดูลส่วน 2 ───
+        let s5 = pptx.addSlide();
+        s5.addText('โมดูลหลักของระบบ (ส่วนที่ 2)', {
+          x: 0.6,
+          y: 0.4,
+          w: 12,
+          h: 0.7,
+          fontSize: 28,
+          bold: true,
+          color: TEXT,
+          fontFace: 'Noto Sans Thai',
+        });
+
+        const mods2 = [
+          {
+            ico: '💉',
+            c: BLUE,
+            t: 'วัคซีน (Vaccine)',
+            items: [
+              'ตั้งแผนวัคซีนมาตรฐาน',
+              'สร้างงานวัคซีนอัตโนมัติตาม Batch',
+              'บันทึกวัคซีนจริง เลือก Lot',
+              'ตัดสต็อก Lot + ประวัติย้อนหลัง',
+            ],
+          },
+          {
+            ico: '💰',
+            c: GREEN,
+            t: 'การขาย (Sale)',
+            items: [
+              'ใบจองขาย → เที่ยวรถ/ส่งออก',
+              'ใบชั่งน้ำหนัก + ราคา/กก.',
+              'ออกบิล/Invoice อ้างอิงใบชั่ง',
+              'Dashboard ยอดขาย/ลูกค้า/ฟาร์ม',
+            ],
+          },
+          {
+            ico: '🔧',
+            c: ORANGE,
+            t: 'ซ่อมบำรุง & โครงการ (Maintenance)',
+            items: [
+              'แจ้งซ่อม/แจ้งสร้าง/โครงการ',
+              'อนุมัติตามสาย/วงเงิน',
+              'ใบสั่งงาน + เบิกอะไหล่ตัด Lot',
+              'ปิดงาน สรุปค่าใช้จ่าย',
+            ],
+          },
+          {
+            ico: '📊',
+            c: PURPLE,
+            t: 'การเงิน (Finance)',
+            items: [
+              'รวบรวมต้นทุนจากทุกแหล่ง',
+              'สรุปต้นทุนต่อ Batch',
+              'ปิดรุ่น ล็อกตัวเลข',
+              'กำไร/ขาดทุนต่อรุ่น/เดือน',
+            ],
+          },
+        ];
+        mods2.forEach((m, i) => {
+          const col = i % 2,
+            row = Math.floor(i / 2);
+          const x = 0.6 + col * 6.2,
+            y = 1.4 + row * 2.9;
+          s5.addShape(pptx.ShapeType.roundRect, {
+            x,
+            y,
+            w: 5.9,
+            h: 2.6,
+            rectRadius: 0.12,
+            fill: { color: BG2 },
+            line: { color: BORDER, width: 0.5 },
+          });
+          s5.addShape(pptx.ShapeType.rect, {
+            x,
+            y,
+            w: 5.9,
+            h: 0.06,
+            fill: { color: m.c },
+          });
+          s5.addText(m.ico + ' ' + m.t, {
+            x: x + 0.3,
+            y: y + 0.15,
+            w: 5.3,
+            h: 0.45,
+            fontSize: 14,
+            bold: true,
+            color: TEXT,
+            fontFace: 'Noto Sans Thai',
+          });
+          m.items.forEach((item, j) => {
+            s5.addText('•  ' + item, {
+              x: x + 0.4,
+              y: y + 0.7 + j * 0.42,
+              w: 5,
+              h: 0.35,
+              fontSize: 11,
+              color: TEXT2,
+              fontFace: 'Noto Sans Thai',
+            });
+          });
+        });
+
+        // ─── SLIDE 6: Timeline ───
+        let s6 = pptx.addSlide();
+        s6.addText('แผนการดำเนินงานโครงการ — รวม 22 สัปดาห์', {
+          x: 0.6,
+          y: 0.3,
+          w: 12,
+          h: 0.7,
+          fontSize: 28,
+          bold: true,
+          color: TEXT,
+          fontFace: 'Noto Sans Thai',
+        });
+
+        // Timeline line
+        s6.addShape(pptx.ShapeType.rect, {
+          x: 0.8,
+          y: 2.45,
+          w: 11.7,
+          h: 0.06,
+          fill: { color: BLUE },
+        });
+
+        const stations = [
+          {
+            wk: 'WK 1–2',
+            t: 'Kickoff',
+            d: 'Requirement\nออกแบบ DB\nตั้ง Repo/CI',
+            ico: '🚀',
+            c: BLUE,
+          },
+          {
+            wk: 'WK 3–5',
+            t: 'Auth+Master',
+            d: 'RBAC, Scope\nMaster Data\nFacility Nodes',
+            ico: '🔐',
+            c: BLUE,
+          },
+          {
+            wk: 'WK 6–8',
+            t: 'Purchase',
+            d: 'PR + อนุมัติ\nBuffer\nHardening',
+            ico: '🛒',
+            c: BLUE,
+          },
+          {
+            wk: 'WK 9–12',
+            t: 'Warehouse',
+            d: 'รับ/โอน/เบิก\nLot & Expiry\nTraceability',
+            ico: '📦',
+            c: GREEN,
+          },
+          {
+            wk: 'WK 13–17',
+            t: 'Production',
+            d: 'Batch+Vaccine\nตาย/น้ำหนัก\nแผนวัคซีน',
+            ico: '🐷',
+            c: GREEN,
+          },
+          {
+            wk: 'WK 18–19',
+            t: 'Sale',
+            d: 'SO→Delivery\nชั่ง→Invoice\nDashboard',
+            ico: '💰',
+            c: ORANGE,
+          },
+          {
+            wk: 'WK 20–21',
+            t: 'Maintenance',
+            d: 'แจ้งซ่อม\nWork Order\nเบิกอะไหล่',
+            ico: '🔧',
+            c: ORANGE,
+          },
+          {
+            wk: 'WK 22',
+            t: 'Finance',
+            d: 'ต้นทุน/กำไร\nปิดรุ่น\n🏁 Go Live',
+            ico: '📊',
+            c: PURPLE,
+          },
+        ];
+        stations.forEach((st, i) => {
+          const x = 0.8 + i * 1.67;
+          // circle
+          s6.addShape(pptx.ShapeType.ellipse, {
+            x: x + 0.55,
+            y: 2.05,
+            w: 0.55,
+            h: 0.55,
+            fill: { color: st.c },
+            line: { color: 'FFFFFF', width: 2 },
+          });
+          s6.addText(st.ico, {
+            x: x + 0.45,
+            y: 2.05,
+            w: 0.75,
+            h: 0.55,
+            fontSize: 14,
+            align: 'center',
+            valign: 'middle',
+          });
+          // labels
+          s6.addText(st.wk, {
+            x: x,
+            y: 2.75,
+            w: 1.5,
+            h: 0.3,
+            fontSize: 8,
+            bold: true,
+            color: st.c,
+            align: 'center',
+            fontFace: 'Inter',
+          });
+          s6.addText(st.t, {
+            x: x,
+            y: 3.0,
+            w: 1.5,
+            h: 0.3,
+            fontSize: 10,
+            bold: true,
+            color: TEXT,
+            align: 'center',
+            fontFace: 'Noto Sans Thai',
+          });
+          s6.addText(st.d, {
+            x: x,
+            y: 3.3,
+            w: 1.5,
+            h: 0.9,
+            fontSize: 8,
+            color: TEXT3,
+            align: 'center',
+            fontFace: 'Noto Sans Thai',
+            lineSpacing: 12,
+          });
+        });
+
+        // Phase legend
+        const phases = [
+          { t: 'Phase 1 — พื้นฐาน (Wk 1–8)', c: BLUE },
+          { t: 'Phase 2 — คลัง+ผลิต (Wk 9–17)', c: GREEN },
+          { t: 'Phase 3 — ขาย+ซ่อม (Wk 18–21)', c: ORANGE },
+          { t: 'Finish — การเงิน (Wk 22)', c: PURPLE },
+        ];
+        phases.forEach((p, i) => {
+          const x = 1.5 + i * 2.9;
+          s6.addShape(pptx.ShapeType.ellipse, {
+            x,
+            y: 5.2,
+            w: 0.18,
+            h: 0.18,
+            fill: { color: p.c },
+          });
+          s6.addText(p.t, {
+            x: x + 0.25,
+            y: 5.12,
+            w: 2.5,
+            h: 0.3,
+            fontSize: 9,
+            color: p.c,
+            fontFace: 'Noto Sans Thai',
+          });
+        });
+
+        // Tech stack
+        s6.addText(
+          'Tech Stack:  ⚛️ Next.js  |  🔷 .NET 10  |  🐘 PostgreSQL  |  🐳 Docker',
+          {
+            x: 2.5,
+            y: 5.8,
+            w: 8,
+            h: 0.35,
+            fontSize: 10,
+            color: TEXT3,
+            align: 'center',
+            fontFace: 'Noto Sans Thai',
+          },
+        );
+
+        // ─── EXPORT ───
+        await pptx.writeFile({ fileName: 'FarmHUB_Presentation.pptx' });
+      }
     </script>
   </body>
 </html>
