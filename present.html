@@ -569,11 +569,15 @@
       }
 
       /* ─── DOWNLOAD BTN ─── */
-      .dl-btn {
+      .dl-wrap {
         position: fixed;
         top: 16px;
         right: 16px;
         z-index: 1000;
+        display: flex;
+        gap: 8px;
+      }
+      .dl-btn {
         display: flex;
         align-items: center;
         gap: 6px;
@@ -594,9 +598,43 @@
         color: #fff;
         border-color: rgba(37, 99, 235, 0.6);
       }
+      .dl-btn.pdf:hover {
+        background: rgba(220, 38, 38, 0.9);
+        border-color: rgba(220, 38, 38, 0.6);
+      }
       .dl-btn svg {
         width: 16px;
         height: 16px;
+      }
+
+      /* ─── PRINT / PDF ─── */
+      @media print {
+        body { background: #fff !important; overflow: visible !important; }
+        .dl-wrap, .nav, .progress { display: none !important; }
+        .deck {
+          position: relative !important;
+          top: auto !important; left: auto !important;
+          transform: none !important;
+          width: 100% !important; height: auto !important;
+          box-shadow: none !important; border-radius: 0 !important;
+          overflow: visible !important;
+        }
+        .slide {
+          position: relative !important;
+          opacity: 1 !important;
+          pointer-events: all !important;
+          width: 100% !important;
+          height: auto !important;
+          min-height: 705px;
+          page-break-after: always;
+          break-after: page;
+        }
+        .slide .fu { opacity: 1 !important; transform: none !important; }
+        .slide-logo { position: absolute; }
+      }
+      @page {
+        size: landscape;
+        margin: 0;
       }
 
       /* ─── SECTION LABEL ─── */
@@ -1615,23 +1653,17 @@
       </div>
     </div>
 
-    <!-- DOWNLOAD BTN -->
-    <button class="dl-btn" onclick="exportPPTX()">
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        fill="none"
-        viewBox="0 0 24 24"
-        stroke="currentColor"
-        stroke-width="2"
-      >
-        <path
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          d="M4 16v2a2 2 0 002 2h12a2 2 0 002-2v-2M7 10l5 5 5-5M12 15V3"
-        />
-      </svg>
-      Download PPTX
-    </button>
+    <!-- DOWNLOAD BUTTONS -->
+    <div class="dl-wrap">
+      <button class="dl-btn" onclick="exportPPTX()">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v2a2 2 0 002 2h12a2 2 0 002-2v-2M7 10l5 5 5-5M12 15V3"/></svg>
+        PPTX
+      </button>
+      <button class="dl-btn pdf" onclick="exportPDF()">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z"/></svg>
+        PDF
+      </button>
+    </div>
 
     <!-- NAV -->
     <div class="nav">
@@ -2413,7 +2445,24 @@
         );
 
         // ─── EXPORT ───
-        await pptx.writeFile({ fileName: 'FarmHUB_Presentation.pptx' });
+        await pptx.writeFile({ fileName: 'JBFarmHUB_PPTX-ระบบจัดการฟาร์ม.pptx' });
+      }
+
+      function exportPDF() {
+        const origTitle = document.title;
+        document.title = 'JBFarmHUB_PDF-ระบบจัดการฟาร์ม';
+        // Show all slides for printing
+        const allSlides = document.querySelectorAll('.slide');
+        allSlides.forEach(s => s.classList.add('active'));
+        // Trigger print dialog (user can Save as PDF)
+        setTimeout(() => {
+          window.print();
+          // Restore after print
+          setTimeout(() => {
+            document.title = origTitle;
+            allSlides.forEach((s, i) => s.classList.toggle('active', i === cur));
+          }, 500);
+        }, 200);
       }
     </script>
   </body>
