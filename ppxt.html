@@ -1,0 +1,1158 @@
+<!doctype html>
+<html lang="th">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>JBFarmHUB — ระบบบริหารจัดการฟาร์ม</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Sans+Thai:wght@300;400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700;800;900&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --bg: #ffffff;
+        --bg2: #f7f8fa;
+        --bg3: #eef0f4;
+        --surface: #ffffff;
+        --border: #e2e5eb;
+        --border2: #d0d4dc;
+        --text: #1a1d23;
+        --text2: #5c6270;
+        --text3: #8b91a0;
+        --accent: #2563eb;
+        --accent-light: #eff4ff;
+        --green: #059669;
+        --green-light: #ecfdf5;
+        --orange: #d97706;
+        --orange-light: #fffbeb;
+        --red: #dc2626;
+        --red-light: #fef2f2;
+        --purple: #7c3aed;
+        --purple-light: #f5f3ff;
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      html,
+      body {
+        font-family: 'Noto Sans Thai', 'Inter', sans-serif;
+        background: #111111;
+        color: var(--text);
+        height: 100%;
+        width: 100%;
+        overflow: hidden;
+        -webkit-font-smoothing: antialiased;
+      }
+
+      /* ─── SLIDE ENGINE ─── */
+      .deck {
+        position: absolute;
+        width: 1255px;
+        height: 650px;
+        top: 50%;
+        left: 50%;
+        transform-origin: center center;
+        border-radius: 6px;
+        overflow: hidden;
+        box-shadow: 0 8px 60px rgba(0, 0, 0, 0.5);
+      }
+
+      .slide {
+        position: absolute;
+        inset: 0;
+        display: flex;
+        flex-direction: column;
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        background: var(--bg);
+        width: 1255px;
+        height: 650px;
+      }
+      .slide.active {
+        opacity: 1;
+        pointer-events: all;
+      }
+
+      /* fade-up children */
+      .slide .fu {
+        opacity: 0;
+        transform: translateY(16px);
+        transition:
+          opacity 0.4s ease,
+          transform 0.4s ease;
+      }
+      .slide.active .fu {
+        opacity: 1;
+        transform: translateY(0);
+      }
+      .slide.active .fu:nth-child(1) {
+        transition-delay: 0.05s;
+      }
+      .slide.active .fu:nth-child(2) {
+        transition-delay: 0.1s;
+      }
+      .slide.active .fu:nth-child(3) {
+        transition-delay: 0.15s;
+      }
+      .slide.active .fu:nth-child(4) {
+        transition-delay: 0.2s;
+      }
+      .slide.active .fu:nth-child(5) {
+        transition-delay: 0.25s;
+      }
+      .slide.active .fu:nth-child(6) {
+        transition-delay: 0.3s;
+      }
+      .slide.active .fu:nth-child(7) {
+        transition-delay: 0.35s;
+      }
+      .slide.active .fu:nth-child(8) {
+        transition-delay: 0.4s;
+      }
+      .slide.active .fu:nth-child(9) {
+        transition-delay: 0.45s;
+      }
+
+      /* ─── PROGRESS ─── */
+      .progress {
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 3px;
+        background: var(--accent);
+        border-radius: 0 2px 2px 0;
+        z-index: 999;
+        transition: width 0.4s ease;
+      }
+
+      /* ─── NAV BAR ─── */
+      .nav {
+        position: fixed;
+        bottom: 16px;
+        left: 50%;
+        transform: translateX(-50%);
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        background: rgba(30, 30, 30, 0.9);
+        backdrop-filter: blur(12px);
+        padding: 8px 20px;
+        border-radius: 40px;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        z-index: 999;
+      }
+      .nav button {
+        width: 34px;
+        height: 34px;
+        border: none;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.1);
+        color: rgba(255, 255, 255, 0.7);
+        font-size: 14px;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.25s;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+      }
+      .nav button:hover {
+        background: var(--accent);
+        color: #fff;
+        border-color: var(--accent);
+      }
+      .nav .dots {
+        display: flex;
+        gap: 5px;
+      }
+      .nav .dot {
+        width: 7px;
+        height: 7px;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.25);
+        cursor: pointer;
+        transition: all 0.3s;
+      }
+      .nav .dot.on {
+        background: var(--accent);
+        width: 24px;
+        border-radius: 4px;
+      }
+      .nav .num {
+        color: rgba(255, 255, 255, 0.5);
+        font-size: 12px;
+        min-width: 36px;
+        text-align: center;
+        font-weight: 500;
+      }
+
+      /* ─── LAYOUTS ─── */
+      .center {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        height: 100%;
+        padding: 60px;
+      }
+      .pad {
+        padding: 44px 56px;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+      }
+
+      /* ─── TYPOGRAPHY ─── */
+      .kicker {
+        display: inline-block;
+        font-size: 11px;
+        font-weight: 700;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        color: var(--accent);
+        background: var(--accent-light);
+        padding: 4px 14px;
+        border-radius: 20px;
+        margin-bottom: 14px;
+      }
+      h1 {
+        font-size: clamp(36px, 5vw, 60px);
+        font-weight: 900;
+        line-height: 1.1;
+        letter-spacing: -0.5px;
+        color: var(--text);
+      }
+      h1 em {
+        font-style: normal;
+        color: var(--accent);
+      }
+      h2 {
+        font-size: clamp(24px, 3vw, 36px);
+        font-weight: 800;
+        line-height: 1.2;
+        margin-bottom: 28px;
+        color: var(--text);
+      }
+      h2 em {
+        font-style: normal;
+        color: var(--accent);
+      }
+      .sub {
+        font-size: clamp(14px, 1.5vw, 18px);
+        color: var(--text2);
+        font-weight: 400;
+        line-height: 1.7;
+        max-width: 560px;
+      }
+
+      /* ─── GRIDS ─── */
+      .g2 {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 20px;
+        width: 100%;
+      }
+      .g3 {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        gap: 16px;
+        width: 100%;
+      }
+      .g5 {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 12px;
+        width: 100%;
+      }
+
+      /* ─── CARD ─── */
+      .card {
+        background: var(--bg2);
+        border: 1px solid var(--border);
+        border-radius: 14px;
+        padding: 24px;
+        transition: all 0.25s;
+      }
+      .card:hover {
+        border-color: var(--border2);
+        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.05);
+        transform: translateY(-2px);
+      }
+      .card .ico {
+        font-size: 28px;
+        margin-bottom: 8px;
+        display: block;
+      }
+      .card h3 {
+        font-size: 15px;
+        font-weight: 700;
+        margin-bottom: 5px;
+        color: var(--text);
+      }
+      .card p,
+      .card li {
+        font-size: 13px;
+        color: var(--text2);
+        line-height: 1.65;
+      }
+      .card ul {
+        list-style: none;
+        padding: 0;
+      }
+      .card ul li {
+        padding: 3px 0;
+        padding-left: 18px;
+        position: relative;
+      }
+      .card ul li::before {
+        content: '';
+        position: absolute;
+        left: 0;
+        top: 10px;
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+        background: var(--accent);
+        opacity: 0.5;
+      }
+
+      /* colored top-line cards */
+      .card.ca {
+        border-top: 3px solid var(--accent);
+      }
+      .card.cg {
+        border-top: 3px solid var(--green);
+      }
+      .card.co {
+        border-top: 3px solid var(--orange);
+      }
+      .card.cp {
+        border-top: 3px solid var(--purple);
+      }
+
+      /* ─── OBJ ITEM (objective row) ─── */
+      .obj {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+        background: var(--bg2);
+        border: 1px solid var(--border);
+        border-radius: 12px;
+        padding: 16px 20px;
+        transition: all 0.25s;
+      }
+      .obj:hover {
+        border-color: var(--border2);
+        box-shadow: 0 2px 12px rgba(0, 0, 0, 0.04);
+      }
+      .obj .on {
+        width: 36px;
+        height: 36px;
+        border-radius: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 16px;
+        font-weight: 800;
+        color: #fff;
+        flex-shrink: 0;
+      }
+      .obj h4 {
+        font-size: 14px;
+        font-weight: 700;
+        color: var(--text);
+        margin-bottom: 1px;
+      }
+      .obj p {
+        font-size: 12px;
+        color: var(--text2);
+        line-height: 1.5;
+      }
+
+      /* ─── USER + BENEFIT ─── */
+      .user-row {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        padding: 10px 16px;
+        border-radius: 10px;
+        background: var(--bg2);
+        border: 1px solid var(--border);
+        transition: all 0.25s;
+      }
+      .user-row:hover {
+        border-color: var(--border2);
+      }
+      .user-row .ua {
+        width: 34px;
+        height: 34px;
+        border-radius: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 18px;
+        flex-shrink: 0;
+      }
+      .user-row h4 {
+        font-size: 13px;
+        font-weight: 600;
+        color: var(--text);
+      }
+      .user-row p {
+        font-size: 11px;
+        color: var(--text3);
+      }
+
+      .benefit {
+        display: flex;
+        align-items: flex-start;
+        gap: 10px;
+        padding: 8px 0;
+      }
+      .benefit .ck {
+        color: var(--green);
+        font-size: 18px;
+        flex-shrink: 0;
+        margin-top: 1px;
+      }
+      .benefit p {
+        font-size: 13px;
+        color: var(--text2);
+        line-height: 1.5;
+      }
+
+      /* ─── TIMELINE ─── */
+      .tl {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        width: 100%;
+      }
+      .ti {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+      }
+      .ti .tw {
+        min-width: 90px;
+        font-size: 11px;
+        font-weight: 700;
+        color: var(--accent);
+        text-align: right;
+        flex-shrink: 0;
+      }
+      .ti .tb {
+        flex: 1;
+        background: var(--bg2);
+        border: 1px solid var(--border);
+        border-radius: 8px;
+        padding: 8px 14px;
+        font-size: 12px;
+        color: var(--text2);
+        transition: all 0.25s;
+      }
+      .ti .tb:hover {
+        border-color: var(--border2);
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+      }
+      .ti .tb strong {
+        color: var(--text);
+        font-weight: 600;
+      }
+
+      /* ─── TAGS ─── */
+      .tags {
+        display: flex;
+        gap: 8px;
+        flex-wrap: wrap;
+        margin-top: 20px;
+      }
+      .tag {
+        padding: 6px 16px;
+        border-radius: 30px;
+        font-size: 12px;
+        font-weight: 500;
+        background: var(--bg2);
+        border: 1px solid var(--border);
+        color: var(--text2);
+      }
+
+      /* ─── COVER DECORATION ─── */
+      .cover-deco {
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 45%;
+        height: 100%;
+        background: linear-gradient(135deg, var(--bg2) 0%, var(--bg3) 100%);
+        clip-path: polygon(15% 0, 100% 0, 100% 100%, 0 100%);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .cover-deco .big-icon {
+        font-size: 120px;
+        opacity: 0.35;
+      }
+      .cover-left {
+        position: relative;
+        z-index: 1;
+        max-width: 55%;
+        padding: 60px;
+      }
+      .date-tag {
+        display: inline-block;
+        font-size: 12px;
+        color: var(--text3);
+        background: var(--bg2);
+        padding: 5px 14px;
+        border-radius: 20px;
+        border: 1px solid var(--border);
+        margin-top: 20px;
+      }
+
+      /* ─── RESPONSIVE ─── */
+      @media (max-width: 700px) {
+        .pad {
+          padding: 28px 24px;
+        }
+        .g2,
+        .g3 {
+          grid-template-columns: 1fr;
+        }
+        .cover-deco {
+          display: none;
+        }
+        .cover-left {
+          max-width: 100%;
+          padding: 40px 28px;
+        }
+      }
+
+      /* ─── HINT ─── */
+      .hint {
+        position: fixed;
+        bottom: 56px;
+        left: 50%;
+        transform: translateX(-50%);
+        font-size: 10px;
+        color: rgba(255, 255, 255, 0.3);
+        z-index: 998;
+        white-space: nowrap;
+      }
+      .hint kbd {
+        background: rgba(255, 255, 255, 0.08);
+        padding: 2px 6px;
+        border-radius: 3px;
+        font-family: inherit;
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        font-size: 10px;
+        color: rgba(255, 255, 255, 0.4);
+      }
+
+      /* ─── SECTION LABEL ─── */
+      .sec-label {
+        font-size: 12px;
+        font-weight: 600;
+        color: var(--text3);
+        text-transform: uppercase;
+        letter-spacing: 1.5px;
+        margin-bottom: 10px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="deck" id="deck">
+      <div class="progress" id="prog"></div>
+
+      <!-- ══════════ SLIDE 1 : COVER ══════════ -->
+      <div
+        class="slide active"
+        style="display: flex; flex-direction: row; position: absolute"
+      >
+        <div class="cover-deco"><span class="big-icon">🐷</span></div>
+        <div
+          class="cover-left"
+          style="
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            height: 100%;
+          "
+        >
+          <h1 class="fu" style="margin-bottom: 16px"><em>JBFarmHUB</em></h1>
+          <h2
+            class="fu"
+            style="
+              font-size: clamp(18px, 2.5vw, 28px);
+              font-weight: 500;
+              color: var(--text2);
+              margin-bottom: 0;
+            "
+          >
+            ระบบบริหารจัดการฟาร์ม
+          </h2>
+          <p class="sub fu" style="margin-top: 12px">
+            รวมทุกข้อมูลของฟาร์มไว้ในที่เดียว ตั้งแต่จัดซื้อ คลังสินค้า
+            การเลี้ยง วัคซีน การขาย ไปจนถึงต้นทุน-กำไร
+          </p>
+          <span class="date-tag fu">📅 16 กุมภาพันธ์ 2569</span>
+        </div>
+      </div>
+
+      <!-- ══════════ SLIDE 2 : วัตถุประสงค์ ══════════ -->
+      <div class="slide">
+        <div class="pad">
+          <span class="kicker fu">Slide 2/6</span>
+          <h2 class="fu">วัตถุประสงค์และเป้าหมายของระบบ <em>FarmHUB</em></h2>
+          <div class="g5">
+            <div class="obj fu">
+              <div class="on" style="background: var(--accent)">1</div>
+              <div>
+                <h4>ยกระดับการบริหารฟาร์มให้เป็นระบบเดียว (Single Platform)</h4>
+                <p>
+                  รวมข้อมูลสำคัญตั้งแต่การซื้อ คลัง การเลี้ยง สุขภาพสัตว์
+                  การซ่อมบำรุง การขาย และการเงิน
+                </p>
+              </div>
+            </div>
+            <div class="obj fu">
+              <div class="on" style="background: var(--green)">2</div>
+              <div>
+                <h4>ควบคุมมาตรฐานงานหน้างานและลดความผิดพลาด</h4>
+                <p>
+                  กำหนด Workflow ที่ชัดเจน ลดการตกหล่นข้อมูล เช่น
+                  ล็อต/วันหมดอายุวัคซีน การเบิกใช้งาน
+                </p>
+              </div>
+            </div>
+            <div class="obj fu">
+              <div class="on" style="background: var(--orange)">3</div>
+              <div>
+                <h4>
+                  เพิ่มความโปร่งใส ตรวจสอบย้อนหลังได้ (Traceability & Audit)
+                </h4>
+                <p>
+                  เก็บประวัติการทำรายการทุกขั้นตอน — ผู้ทำ / เวลา / สถานที่ /
+                  เอกสารแนบ
+                </p>
+              </div>
+            </div>
+            <div class="obj fu">
+              <div class="on" style="background: var(--red)">4</div>
+              <div>
+                <h4>ควบคุมสต็อกและต้นทุนได้แม่นยำ</h4>
+                <p>
+                  สต็อกแบบล็อต/วันหมดอายุ/คลังย่อย
+                  เชื่อมต้นทุนจริงต่อรุ่น/ต่อโรงเรือน/ต่อกก.
+                </p>
+              </div>
+            </div>
+            <div class="obj fu">
+              <div class="on" style="background: var(--purple)">5</div>
+              <div>
+                <h4>สนับสนุนการตัดสินใจด้วยข้อมูล (Data-driven)</h4>
+                <p>
+                  แดชบอร์ด อัตราตาย อัตราโต ต้นทุน/กก. กำไร/รุ่น ยอดขายรายวัน
+                  แจ้งเตือนอัตโนมัติ
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ══════════ SLIDE 3 : ผู้ใช้งาน + ประโยชน์ ══════════ -->
+      <div class="slide">
+        <div class="pad">
+          <span class="kicker fu">Slide 3/6</span>
+          <h2 class="fu">ผู้ใช้งานระบบและ<em>ประโยชน์</em>สำหรับผู้บริหาร</h2>
+          <div class="g2" style="gap: 36px; align-items: start">
+            <div>
+              <div class="sec-label fu">กลุ่มผู้ใช้งานระบบ</div>
+              <div style="display: flex; flex-direction: column; gap: 8px">
+                <div class="user-row fu">
+                  <div class="ua" style="background: var(--accent-light)">
+                    🛡️
+                  </div>
+                  <div>
+                    <h4>ผู้ดูแลระบบ (Admin/IT)</h4>
+                    <p>จัดการผู้ใช้ สิทธิ์ ตั้งค่าระบบ</p>
+                  </div>
+                </div>
+                <div class="user-row fu">
+                  <div class="ua" style="background: var(--orange-light)">
+                    👔
+                  </div>
+                  <div>
+                    <h4>ผู้บริหาร</h4>
+                    <p>ดูภาพรวม KPI/รายงาน อนุมัติ</p>
+                  </div>
+                </div>
+                <div class="user-row fu">
+                  <div class="ua" style="background: var(--green-light)">
+                    🌾
+                  </div>
+                  <div>
+                    <h4>ผู้จัดการฟาร์ม</h4>
+                    <p>คุมงาน วางแผน ติดตาม อนุมัติ</p>
+                  </div>
+                </div>
+                <div class="user-row fu">
+                  <div class="ua" style="background: var(--purple-light)">
+                    📋
+                  </div>
+                  <div>
+                    <h4>หัวหน้างาน</h4>
+                    <p>จัดซื้อ คลัง ผลิต สัตวบาล ช่าง ขาย</p>
+                  </div>
+                </div>
+                <div class="user-row fu">
+                  <div class="ua" style="background: var(--red-light)">👷</div>
+                  <div>
+                    <h4>พนักงานปฏิบัติงาน</h4>
+                    <p>บันทึกงานจริงรายวัน</p>
+                  </div>
+                </div>
+                <div class="user-row fu">
+                  <div class="ua" style="background: var(--bg3)">👁️</div>
+                  <div>
+                    <h4>ผู้ใช้งานภายนอก</h4>
+                    <p>เข้าดูอย่างเดียว (Read-only)</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div>
+              <div class="sec-label fu">ประโยชน์สำหรับผู้บริหาร</div>
+              <div
+                class="card fu"
+                style="border-left: 4px solid var(--green); padding: 28px"
+              >
+                <div style="display: flex; flex-direction: column; gap: 14px">
+                  <div class="benefit">
+                    <span class="ck">✔</span>
+                    <p>
+                      <strong>เข้าถึงข้อมูลเชิงลึกได้ทันที</strong> — Dashboard
+                      KPI แบบ real-time ทุกฟาร์ม
+                    </p>
+                  </div>
+                  <div class="benefit">
+                    <span class="ck">✔</span>
+                    <p>
+                      <strong>ตัดสินใจได้อย่างแม่นยำ</strong> —
+                      มีรายงานและข้อมูลวิเคราะห์ครบถ้วน
+                    </p>
+                  </div>
+                  <div class="benefit">
+                    <span class="ck">✔</span>
+                    <p>
+                      <strong>ควบคุมต้นทุนได้อย่างมีประสิทธิภาพ</strong> —
+                      ต้นทุน/กก. ต้นทุน/ตัว ต้นทุน/รุ่น
+                    </p>
+                  </div>
+                  <div class="benefit">
+                    <span class="ck">✔</span>
+                    <p>
+                      <strong>เพิ่มความโปร่งใสและตรวจสอบได้</strong> — Audit
+                      trail ทุกธุรกรรม
+                    </p>
+                  </div>
+                  <div class="benefit">
+                    <span class="ck">✔</span>
+                    <p>
+                      <strong>สนับสนุนการขยายธุรกิจ</strong> —
+                      เพิ่มสาขา/ฟาร์มใหม่ได้ง่าย รองรับ IoT
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ══════════ SLIDE 4 : โมดูลส่วนที่ 1 ══════════ -->
+      <div class="slide">
+        <div class="pad">
+          <span class="kicker fu">Slide 4/6</span>
+          <h2 class="fu">โมดูลหลักของระบบ <em>(ส่วนที่ 1)</em></h2>
+          <div class="g2">
+            <div class="card ca fu">
+              <span class="ico">🔐</span>
+              <h3>พื้นฐานและข้อมูลหลัก</h3>
+              <ul>
+                <li>Master Data และข้อมูลตั้งต้น</li>
+                <li>ระบบยืนยันตัวตนและสิทธิ์ผู้ใช้</li>
+                <li>โครงสร้างสถานที่ (ฟาร์ม/โซน/โรงเรือน)</li>
+                <li>Audit Log เพื่อตรวจสอบย้อนหลัง</li>
+              </ul>
+            </div>
+            <div class="card cg fu">
+              <span class="ico">🛒</span>
+              <h3>การจัดซื้อ (Purchase Requests)</h3>
+              <ul>
+                <li>สร้างใบขอซื้อ (PR)</li>
+                <li>กระบวนการอนุมัติแบบหลายขั้น</li>
+                <li>ติดตามสถานะและประวัติ</li>
+                <li>เชื่อมโยงกับระบบคลัง</li>
+              </ul>
+            </div>
+            <div class="card co fu">
+              <span class="ico">📦</span>
+              <h3>คลังสินค้า (Warehouse)</h3>
+              <ul>
+                <li>รับเข้า – โอนย้าย – เบิกออก</li>
+                <li>จัดการ Lot / วันหมดอายุ</li>
+                <li>ติดตามสต็อกและ Traceability</li>
+                <li>ปรับปรุงสต็อกและตรวจนับ</li>
+              </ul>
+            </div>
+            <div class="card cp fu">
+              <span class="ico">🐷</span>
+              <h3>การผลิต (Production)</h3>
+              <ul>
+                <li>เปิดรุ่นเลี้ยงและติดตาม Batch</li>
+                <li>การเคลื่อนย้ายระหว่างโรงเรือน</li>
+                <li>เบิกวัตถุดิบเพื่อการเลี้ยง</li>
+                <li>บันทึกการตายและคัดทิ้ง</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ══════════ SLIDE 5 : โมดูลส่วนที่ 2 ══════════ -->
+      <div class="slide">
+        <div class="pad">
+          <span class="kicker fu">Slide 5/6</span>
+          <h2 class="fu">โมดูลหลักของระบบ <em>(ส่วนที่ 2)</em></h2>
+          <div class="g2">
+            <div class="card ca fu">
+              <span class="ico">💉</span>
+              <h3>วัคซีน (Vaccine)</h3>
+              <ul>
+                <li>ตั้งแผนวัคซีนมาตรฐาน</li>
+                <li>สร้างงานวัคซีนอัตโนมัติตาม Batch</li>
+                <li>บันทึกวัคซีนจริง เลือก Lot</li>
+                <li>ตัดสต็อก Lot + ประวัติย้อนหลัง</li>
+              </ul>
+            </div>
+            <div class="card cg fu">
+              <span class="ico">💰</span>
+              <h3>การขาย (Sale)</h3>
+              <ul>
+                <li>ใบจองขาย → เที่ยวรถ/ส่งออก</li>
+                <li>ใบชั่งน้ำหนัก + ราคา/กก.</li>
+                <li>ออกบิล/Invoice อ้างอิงใบชั่ง</li>
+                <li>Dashboard ยอดขาย/ลูกค้า/ฟาร์ม</li>
+              </ul>
+            </div>
+            <div class="card co fu">
+              <span class="ico">🔧</span>
+              <h3>ซ่อมบำรุง & โครงการ (Maintenance)</h3>
+              <ul>
+                <li>แจ้งซ่อม/แจ้งสร้าง/โครงการ</li>
+                <li>อนุมัติตามสาย/วงเงิน</li>
+                <li>ใบสั่งงาน + เบิกอะไหล่ตัด Lot</li>
+                <li>ปิดงาน สรุปค่าใช้จ่าย</li>
+              </ul>
+            </div>
+            <div class="card cp fu">
+              <span class="ico">📊</span>
+              <h3>การเงิน (Finance)</h3>
+              <ul>
+                <li>รวบรวมต้นทุนจากทุกแหล่ง</li>
+                <li>สรุปต้นทุนต่อ Batch</li>
+                <li>ปิดรุ่น ล็อกตัวเลข</li>
+                <li>กำไร/ขาดทุนต่อรุ่น/เดือน</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ══════════ SLIDE 6 : แผนดำเนินงาน ══════════ -->
+      <div class="slide">
+        <div class="pad">
+          <span class="kicker fu">Slide 6/6</span>
+          <h2 class="fu">แผนการดำเนินงานโครงการ — <em>รวม 22 สัปดาห์</em></h2>
+          <div class="g2" style="gap: 32px; align-items: start">
+            <div>
+              <div class="sec-label fu">Phase 1 — พื้นฐาน (Wk 1–8)</div>
+              <div class="tl fu" style="margin-bottom: 20px">
+                <div class="ti">
+                  <span class="tw">Wk 1–2</span>
+                  <div class="tb">
+                    <strong>Kickoff + ออกแบบ</strong> — เก็บ requirement, สรุป
+                    DB, ตั้ง repo/CI/CD
+                  </div>
+                </div>
+                <div class="ti">
+                  <span class="tw">Wk 3–4</span>
+                  <div class="tb">
+                    <strong>Auth + RBAC</strong> — Login, Users/Roles, Facility
+                    Scopes, Audit
+                  </div>
+                </div>
+                <div class="ti">
+                  <span class="tw">Wk 5</span>
+                  <div class="tb">
+                    <strong>Master Data</strong> — Items, UOM, Partners, Lot
+                    Policies
+                  </div>
+                </div>
+                <div class="ti">
+                  <span class="tw">Wk 6–7</span>
+                  <div class="tb">
+                    <strong>Purchase Requests</strong> — PR, อนุมัติ, ค้นหา/กรอง
+                  </div>
+                </div>
+                <div class="ti">
+                  <span class="tw">Wk 8</span>
+                  <div class="tb">
+                    <strong>Buffer / Hardening</strong> — ปรับ UX, Performance
+                  </div>
+                </div>
+              </div>
+              <div class="sec-label fu">Phase 2 — คลัง + ผลิต (Wk 9–17)</div>
+              <div class="tl fu">
+                <div class="ti">
+                  <span class="tw">Wk 9–12</span>
+                  <div class="tb">
+                    <strong>Warehouse</strong> — รับ/โอน/เบิก, Lot/Expiry,
+                    Traceability
+                  </div>
+                </div>
+                <div class="ti">
+                  <span class="tw">Wk 13–15</span>
+                  <div class="tb">
+                    <strong>Production</strong> — Batch, ย้ายรุ่น, เบิกของ,
+                    ตาย/น้ำหนัก
+                  </div>
+                </div>
+                <div class="ti">
+                  <span class="tw">Wk 16–17</span>
+                  <div class="tb">
+                    <strong>Vaccine</strong> — แผนวัคซีน, tasks, บันทึกจริง
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div>
+              <div class="sec-label fu">
+                Phase 3 — ขาย + ซ่อม + การเงิน (Wk 18–22)
+              </div>
+              <div class="tl fu" style="margin-bottom: 20px">
+                <div class="ti">
+                  <span class="tw">Wk 18–19</span>
+                  <div class="tb">
+                    <strong>Sale</strong> — SO, Delivery, ชั่ง, Invoice,
+                    Dashboard
+                  </div>
+                </div>
+                <div class="ti">
+                  <span class="tw">Wk 20–21</span>
+                  <div class="tb">
+                    <strong>Maintenance</strong> — แจ้งซ่อม, Work Order,
+                    เบิกอะไหล่
+                  </div>
+                </div>
+                <div class="ti">
+                  <span class="tw">Wk 22</span>
+                  <div class="tb">
+                    <strong>Finance</strong> — ต้นทุน, ปิดรุ่น, กำไร/ขาดทุน
+                  </div>
+                </div>
+              </div>
+              <div class="sec-label fu">Tech Stack</div>
+              <div class="g2 fu" style="gap: 8px; margin-top: 4px">
+                <div
+                  style="
+                    background: var(--bg2);
+                    border: 1px solid var(--border);
+                    border-radius: 10px;
+                    padding: 14px;
+                    text-align: center;
+                  "
+                >
+                  <div style="font-size: 24px; margin-bottom: 4px">⚛️</div>
+                  <div
+                    style="
+                      font-size: 12px;
+                      font-weight: 700;
+                      color: var(--text);
+                    "
+                  >
+                    Next.js
+                  </div>
+                  <div style="font-size: 10px; color: var(--text3)">
+                    Frontend
+                  </div>
+                </div>
+                <div
+                  style="
+                    background: var(--bg2);
+                    border: 1px solid var(--border);
+                    border-radius: 10px;
+                    padding: 14px;
+                    text-align: center;
+                  "
+                >
+                  <div style="font-size: 24px; margin-bottom: 4px">🔷</div>
+                  <div
+                    style="
+                      font-size: 12px;
+                      font-weight: 700;
+                      color: var(--text);
+                    "
+                  >
+                    .NET 10
+                  </div>
+                  <div style="font-size: 10px; color: var(--text3)">
+                    Backend
+                  </div>
+                </div>
+                <div
+                  style="
+                    background: var(--bg2);
+                    border: 1px solid var(--border);
+                    border-radius: 10px;
+                    padding: 14px;
+                    text-align: center;
+                  "
+                >
+                  <div style="font-size: 24px; margin-bottom: 4px">🐘</div>
+                  <div
+                    style="
+                      font-size: 12px;
+                      font-weight: 700;
+                      color: var(--text);
+                    "
+                  >
+                    PostgreSQL
+                  </div>
+                  <div style="font-size: 10px; color: var(--text3)">
+                    Database
+                  </div>
+                </div>
+                <div
+                  style="
+                    background: var(--bg2);
+                    border: 1px solid var(--border);
+                    border-radius: 10px;
+                    padding: 14px;
+                    text-align: center;
+                  "
+                >
+                  <div style="font-size: 24px; margin-bottom: 4px">🐳</div>
+                  <div
+                    style="
+                      font-size: 12px;
+                      font-weight: 700;
+                      color: var(--text);
+                    "
+                  >
+                    Docker
+                  </div>
+                  <div style="font-size: 10px; color: var(--text3)">Infra</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- NAV -->
+    <div class="nav">
+      <button onclick="go(-1)" aria-label="Previous">◀</button>
+      <div class="dots" id="dots"></div>
+      <span class="num" id="num">1 / 6</span>
+      <button onclick="go(1)" aria-label="Next">▶</button>
+    </div>
+
+    <script>
+      // Auto-scale deck to fit viewport
+      const deck = document.getElementById('deck');
+      function scaleDeck() {
+        const sw = 1255,
+          sh = 650;
+        const vw = window.innerWidth,
+          vh = window.innerHeight - 80; // 80px for nav
+        const s = Math.min(vw / sw, vh / sh, 1); // never scale up past 1
+        deck.style.transform = `translate(-50%,-50%) scale(${s})`;
+      }
+      scaleDeck();
+      window.addEventListener('resize', scaleDeck);
+
+      const slides = document.querySelectorAll('.slide'),
+        N = slides.length;
+      let cur = 0;
+      const dots = document.getElementById('dots');
+      for (let i = 0; i < N; i++) {
+        const d = document.createElement('div');
+        d.className = 'dot' + (i === 0 ? ' on' : '');
+        d.onclick = () => jump(i);
+        dots.appendChild(d);
+      }
+      function render() {
+        slides.forEach((s, i) => s.classList.toggle('active', i === cur));
+        document
+          .querySelectorAll('.dot')
+          .forEach((d, i) => d.classList.toggle('on', i === cur));
+        document.getElementById('num').textContent = `${cur + 1} / ${N}`;
+        document.getElementById('prog').style.width =
+          ((cur + 1) / N) * 100 + '%';
+      }
+      function go(d) {
+        const n = cur + d;
+        if (n >= 0 && n < N) {
+          cur = n;
+          render();
+        }
+      }
+      function jump(i) {
+        cur = i;
+        render();
+      }
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'ArrowRight' || e.key === ' ') {
+          e.preventDefault();
+          go(1);
+        } else if (e.key === 'ArrowLeft') {
+          e.preventDefault();
+          go(-1);
+        } else if (e.key === 'Home') {
+          e.preventDefault();
+          jump(0);
+        } else if (e.key === 'End') {
+          e.preventDefault();
+          jump(N - 1);
+        } else if (e.key === 'f' || e.key === 'F') {
+          document.fullscreenElement
+            ? document.exitFullscreen()
+            : document.documentElement.requestFullscreen();
+        }
+      });
+      let tx = 0;
+      document.addEventListener(
+        'touchstart',
+        (e) => (tx = e.changedTouches[0].screenX),
+      );
+      document.addEventListener('touchend', (e) => {
+        const d = tx - e.changedTouches[0].screenX;
+        if (Math.abs(d) > 50) {
+          d > 0 ? go(1) : go(-1);
+        }
+      });
+    </script>
+  </body>
+</html>
