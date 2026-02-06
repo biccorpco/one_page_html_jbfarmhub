@@ -498,7 +498,7 @@
         justify-content: center;
       }
       .cover-deco .big-icon {
-        font-size: 120px;
+        font-size: 200px;
         opacity: 0.35;
       }
       .cover-left {
@@ -879,194 +879,150 @@
         </div>
       </div>
 
-      <!-- ══════════ SLIDE 6 : แผนดำเนินงาน ══════════ -->
+      <!-- ══════════ SLIDE 6 : แผนดำเนินงาน (Timeline) ══════════ -->
       <div class="slide">
-        <div class="pad">
+        <div class="pad" style="padding:36px 48px;">
           <span class="kicker fu">Slide 6/6</span>
-          <h2 class="fu">แผนการดำเนินงานโครงการ — <em>รวม 22 สัปดาห์</em></h2>
-          <div class="g2" style="gap: 32px; align-items: start">
-            <div>
-              <div class="sec-label fu">Phase 1 — พื้นฐาน (Wk 1–8)</div>
-              <div class="tl fu" style="margin-bottom: 20px">
-                <div class="ti">
-                  <span class="tw">Wk 1–2</span>
-                  <div class="tb">
-                    <strong>Kickoff + ออกแบบ</strong> — เก็บ requirement, สรุป
-                    DB, ตั้ง repo/CI/CD
-                  </div>
-                </div>
-                <div class="ti">
-                  <span class="tw">Wk 3–4</span>
-                  <div class="tb">
-                    <strong>Auth + RBAC</strong> — Login, Users/Roles, Facility
-                    Scopes, Audit
-                  </div>
-                </div>
-                <div class="ti">
-                  <span class="tw">Wk 5</span>
-                  <div class="tb">
-                    <strong>Master Data</strong> — Items, UOM, Partners, Lot
-                    Policies
-                  </div>
-                </div>
-                <div class="ti">
-                  <span class="tw">Wk 6–7</span>
-                  <div class="tb">
-                    <strong>Purchase Requests</strong> — PR, อนุมัติ, ค้นหา/กรอง
-                  </div>
-                </div>
-                <div class="ti">
-                  <span class="tw">Wk 8</span>
-                  <div class="tb">
-                    <strong>Buffer / Hardening</strong> — ปรับ UX, Performance
-                  </div>
-                </div>
-              </div>
-              <div class="sec-label fu">Phase 2 — คลัง + ผลิต (Wk 9–17)</div>
-              <div class="tl fu">
-                <div class="ti">
-                  <span class="tw">Wk 9–12</span>
-                  <div class="tb">
-                    <strong>Warehouse</strong> — รับ/โอน/เบิก, Lot/Expiry,
-                    Traceability
-                  </div>
-                </div>
-                <div class="ti">
-                  <span class="tw">Wk 13–15</span>
-                  <div class="tb">
-                    <strong>Production</strong> — Batch, ย้ายรุ่น, เบิกของ,
-                    ตาย/น้ำหนัก
-                  </div>
-                </div>
-                <div class="ti">
-                  <span class="tw">Wk 16–17</span>
-                  <div class="tb">
-                    <strong>Vaccine</strong> — แผนวัคซีน, tasks, บันทึกจริง
-                  </div>
-                </div>
-              </div>
+          <h2 class="fu" style="margin-bottom:36px;">แผนการดำเนินงานโครงการ — <em>รวม 22 สัปดาห์</em></h2>
+
+          <!-- HORIZONTAL TIMELINE -->
+          <div class="fu" style="position:relative;width:100%;">
+            <!-- The line -->
+            <div style="position:absolute;top:20px;left:24px;right:24px;height:3px;background:var(--bg3);border-radius:2px;z-index:0;">
+              <div style="width:100%;height:100%;background:linear-gradient(90deg,var(--accent),var(--green),var(--orange),var(--purple));border-radius:2px;"></div>
             </div>
-            <div>
-              <div class="sec-label fu">
-                Phase 3 — ขาย + ซ่อม + การเงิน (Wk 18–22)
-              </div>
-              <div class="tl fu" style="margin-bottom: 20px">
-                <div class="ti">
-                  <span class="tw">Wk 18–19</span>
-                  <div class="tb">
-                    <strong>Sale</strong> — SO, Delivery, ชั่ง, Invoice,
-                    Dashboard
-                  </div>
+
+            <!-- Stations -->
+            <div style="display:flex;justify-content:space-between;position:relative;z-index:1;">
+
+              <!-- Station 1 -->
+              <div style="display:flex;flex-direction:column;align-items:center;width:120px;">
+                <div style="width:42px;height:42px;border-radius:50%;background:var(--accent);display:flex;align-items:center;justify-content:center;border:4px solid #fff;box-shadow:0 2px 8px rgba(37,99,235,.3);">
+                  <span style="font-size:18px;">🚀</span>
                 </div>
-                <div class="ti">
-                  <span class="tw">Wk 20–21</span>
-                  <div class="tb">
-                    <strong>Maintenance</strong> — แจ้งซ่อม, Work Order,
-                    เบิกอะไหล่
-                  </div>
-                </div>
-                <div class="ti">
-                  <span class="tw">Wk 22</span>
-                  <div class="tb">
-                    <strong>Finance</strong> — ต้นทุน, ปิดรุ่น, กำไร/ขาดทุน
-                  </div>
+                <div style="margin-top:12px;text-align:center;">
+                  <div style="font-size:10px;font-weight:700;color:var(--accent);letter-spacing:.5px;">WK 1–2</div>
+                  <div style="font-size:12px;font-weight:700;color:var(--text);margin-top:2px;">Kickoff</div>
+                  <div style="font-size:10px;color:var(--text3);line-height:1.4;margin-top:2px;">Requirement<br>ออกแบบ DB<br>ตั้ง Repo/CI</div>
                 </div>
               </div>
-              <div class="sec-label fu">Tech Stack</div>
-              <div class="g2 fu" style="gap: 8px; margin-top: 4px">
-                <div
-                  style="
-                    background: var(--bg2);
-                    border: 1px solid var(--border);
-                    border-radius: 10px;
-                    padding: 14px;
-                    text-align: center;
-                  "
-                >
-                  <div style="font-size: 24px; margin-bottom: 4px">⚛️</div>
-                  <div
-                    style="
-                      font-size: 12px;
-                      font-weight: 700;
-                      color: var(--text);
-                    "
-                  >
-                    Next.js
-                  </div>
-                  <div style="font-size: 10px; color: var(--text3)">
-                    Frontend
-                  </div>
+
+              <!-- Station 2 -->
+              <div style="display:flex;flex-direction:column;align-items:center;width:120px;">
+                <div style="width:42px;height:42px;border-radius:50%;background:var(--accent);display:flex;align-items:center;justify-content:center;border:4px solid #fff;box-shadow:0 2px 8px rgba(37,99,235,.3);">
+                  <span style="font-size:18px;">🔐</span>
                 </div>
-                <div
-                  style="
-                    background: var(--bg2);
-                    border: 1px solid var(--border);
-                    border-radius: 10px;
-                    padding: 14px;
-                    text-align: center;
-                  "
-                >
-                  <div style="font-size: 24px; margin-bottom: 4px">🔷</div>
-                  <div
-                    style="
-                      font-size: 12px;
-                      font-weight: 700;
-                      color: var(--text);
-                    "
-                  >
-                    .NET 10
-                  </div>
-                  <div style="font-size: 10px; color: var(--text3)">
-                    Backend
-                  </div>
-                </div>
-                <div
-                  style="
-                    background: var(--bg2);
-                    border: 1px solid var(--border);
-                    border-radius: 10px;
-                    padding: 14px;
-                    text-align: center;
-                  "
-                >
-                  <div style="font-size: 24px; margin-bottom: 4px">🐘</div>
-                  <div
-                    style="
-                      font-size: 12px;
-                      font-weight: 700;
-                      color: var(--text);
-                    "
-                  >
-                    PostgreSQL
-                  </div>
-                  <div style="font-size: 10px; color: var(--text3)">
-                    Database
-                  </div>
-                </div>
-                <div
-                  style="
-                    background: var(--bg2);
-                    border: 1px solid var(--border);
-                    border-radius: 10px;
-                    padding: 14px;
-                    text-align: center;
-                  "
-                >
-                  <div style="font-size: 24px; margin-bottom: 4px">🐳</div>
-                  <div
-                    style="
-                      font-size: 12px;
-                      font-weight: 700;
-                      color: var(--text);
-                    "
-                  >
-                    Docker
-                  </div>
-                  <div style="font-size: 10px; color: var(--text3)">Infra</div>
+                <div style="margin-top:12px;text-align:center;">
+                  <div style="font-size:10px;font-weight:700;color:var(--accent);letter-spacing:.5px;">WK 3–5</div>
+                  <div style="font-size:12px;font-weight:700;color:var(--text);margin-top:2px;">Auth + Master</div>
+                  <div style="font-size:10px;color:var(--text3);line-height:1.4;margin-top:2px;">RBAC, Scope<br>Master Data<br>Facility Nodes</div>
                 </div>
               </div>
+
+              <!-- Station 3 -->
+              <div style="display:flex;flex-direction:column;align-items:center;width:120px;">
+                <div style="width:42px;height:42px;border-radius:50%;background:var(--accent);display:flex;align-items:center;justify-content:center;border:4px solid #fff;box-shadow:0 2px 8px rgba(37,99,235,.3);">
+                  <span style="font-size:18px;">🛒</span>
+                </div>
+                <div style="margin-top:12px;text-align:center;">
+                  <div style="font-size:10px;font-weight:700;color:var(--accent);letter-spacing:.5px;">WK 6–8</div>
+                  <div style="font-size:12px;font-weight:700;color:var(--text);margin-top:2px;">Purchase</div>
+                  <div style="font-size:10px;color:var(--text3);line-height:1.4;margin-top:2px;">PR + อนุมัติ<br>Buffer<br>Hardening</div>
+                </div>
+              </div>
+
+              <!-- Station 4 -->
+              <div style="display:flex;flex-direction:column;align-items:center;width:120px;">
+                <div style="width:42px;height:42px;border-radius:50%;background:var(--green);display:flex;align-items:center;justify-content:center;border:4px solid #fff;box-shadow:0 2px 8px rgba(5,150,105,.3);">
+                  <span style="font-size:18px;">📦</span>
+                </div>
+                <div style="margin-top:12px;text-align:center;">
+                  <div style="font-size:10px;font-weight:700;color:var(--green);letter-spacing:.5px;">WK 9–12</div>
+                  <div style="font-size:12px;font-weight:700;color:var(--text);margin-top:2px;">Warehouse</div>
+                  <div style="font-size:10px;color:var(--text3);line-height:1.4;margin-top:2px;">รับ/โอน/เบิก<br>Lot & Expiry<br>Traceability</div>
+                </div>
+              </div>
+
+              <!-- Station 5 -->
+              <div style="display:flex;flex-direction:column;align-items:center;width:120px;">
+                <div style="width:42px;height:42px;border-radius:50%;background:var(--green);display:flex;align-items:center;justify-content:center;border:4px solid #fff;box-shadow:0 2px 8px rgba(5,150,105,.3);">
+                  <span style="font-size:18px;">🐷</span>
+                </div>
+                <div style="margin-top:12px;text-align:center;">
+                  <div style="font-size:10px;font-weight:700;color:var(--green);letter-spacing:.5px;">WK 13–17</div>
+                  <div style="font-size:12px;font-weight:700;color:var(--text);margin-top:2px;">Production</div>
+                  <div style="font-size:10px;color:var(--text3);line-height:1.4;margin-top:2px;">Batch + Vaccine<br>ตาย/น้ำหนัก<br>แผนวัคซีน</div>
+                </div>
+              </div>
+
+              <!-- Station 6 -->
+              <div style="display:flex;flex-direction:column;align-items:center;width:120px;">
+                <div style="width:42px;height:42px;border-radius:50%;background:var(--orange);display:flex;align-items:center;justify-content:center;border:4px solid #fff;box-shadow:0 2px 8px rgba(217,119,6,.3);">
+                  <span style="font-size:18px;">💰</span>
+                </div>
+                <div style="margin-top:12px;text-align:center;">
+                  <div style="font-size:10px;font-weight:700;color:var(--orange);letter-spacing:.5px;">WK 18–19</div>
+                  <div style="font-size:12px;font-weight:700;color:var(--text);margin-top:2px;">Sale</div>
+                  <div style="font-size:10px;color:var(--text3);line-height:1.4;margin-top:2px;">SO → Delivery<br>ชั่ง → Invoice<br>Dashboard</div>
+                </div>
+              </div>
+
+              <!-- Station 7 -->
+              <div style="display:flex;flex-direction:column;align-items:center;width:120px;">
+                <div style="width:42px;height:42px;border-radius:50%;background:var(--orange);display:flex;align-items:center;justify-content:center;border:4px solid #fff;box-shadow:0 2px 8px rgba(217,119,6,.3);">
+                  <span style="font-size:18px;">🔧</span>
+                </div>
+                <div style="margin-top:12px;text-align:center;">
+                  <div style="font-size:10px;font-weight:700;color:var(--orange);letter-spacing:.5px;">WK 20–21</div>
+                  <div style="font-size:12px;font-weight:700;color:var(--text);margin-top:2px;">Maintenance</div>
+                  <div style="font-size:10px;color:var(--text3);line-height:1.4;margin-top:2px;">แจ้งซ่อม<br>Work Order<br>เบิกอะไหล่</div>
+                </div>
+              </div>
+
+              <!-- Station 8 (finish) -->
+              <div style="display:flex;flex-direction:column;align-items:center;width:120px;">
+                <div style="width:42px;height:42px;border-radius:50%;background:var(--purple);display:flex;align-items:center;justify-content:center;border:4px solid #fff;box-shadow:0 2px 8px rgba(124,58,237,.3);">
+                  <span style="font-size:18px;">📊</span>
+                </div>
+                <div style="margin-top:12px;text-align:center;">
+                  <div style="font-size:10px;font-weight:700;color:var(--purple);letter-spacing:.5px;">WK 22</div>
+                  <div style="font-size:12px;font-weight:700;color:var(--text);margin-top:2px;">Finance</div>
+                  <div style="font-size:10px;color:var(--text3);line-height:1.4;margin-top:2px;">ต้นทุน/กำไร<br>ปิดรุ่น<br>🏁 Go Live</div>
+                </div>
+              </div>
+
             </div>
           </div>
+
+          <!-- Phase labels -->
+          <div class="fu" style="display:flex;gap:12px;margin-top:32px;justify-content:center;">
+            <div style="display:flex;align-items:center;gap:6px;background:var(--accent-light);padding:6px 16px;border-radius:20px;">
+              <div style="width:10px;height:10px;border-radius:50%;background:var(--accent);"></div>
+              <span style="font-size:11px;font-weight:600;color:var(--accent);">Phase 1 — พื้นฐาน (Wk 1–8)</span>
+            </div>
+            <div style="display:flex;align-items:center;gap:6px;background:var(--green-light);padding:6px 16px;border-radius:20px;">
+              <div style="width:10px;height:10px;border-radius:50%;background:var(--green);"></div>
+              <span style="font-size:11px;font-weight:600;color:var(--green);">Phase 2 — คลัง+ผลิต (Wk 9–17)</span>
+            </div>
+            <div style="display:flex;align-items:center;gap:6px;background:var(--orange-light);padding:6px 16px;border-radius:20px;">
+              <div style="width:10px;height:10px;border-radius:50%;background:var(--orange);"></div>
+              <span style="font-size:11px;font-weight:600;color:var(--orange);">Phase 3 — ขาย+ซ่อม (Wk 18–21)</span>
+            </div>
+            <div style="display:flex;align-items:center;gap:6px;background:var(--purple-light);padding:6px 16px;border-radius:20px;">
+              <div style="width:10px;height:10px;border-radius:50%;background:var(--purple);"></div>
+              <span style="font-size:11px;font-weight:600;color:var(--purple);">Finish — การเงิน (Wk 22)</span>
+            </div>
+          </div>
+
+          <!-- Tech Stack row -->
+          <div class="fu" style="display:flex;gap:10px;margin-top:20px;justify-content:center;">
+            <span style="font-size:11px;color:var(--text3);font-weight:600;display:flex;align-items:center;gap:4px;">Tech Stack:</span>
+            <span style="font-size:11px;background:var(--bg2);border:1px solid var(--border);padding:4px 12px;border-radius:16px;color:var(--text2);">⚛️ Next.js</span>
+            <span style="font-size:11px;background:var(--bg2);border:1px solid var(--border);padding:4px 12px;border-radius:16px;color:var(--text2);">🔷 .NET 10</span>
+            <span style="font-size:11px;background:var(--bg2);border:1px solid var(--border);padding:4px 12px;border-radius:16px;color:var(--text2);">🐘 PostgreSQL</span>
+            <span style="font-size:11px;background:var(--bg2);border:1px solid var(--border);padding:4px 12px;border-radius:16px;color:var(--text2);">🐳 Docker</span>
+          </div>
+
         </div>
       </div>
     </div>
