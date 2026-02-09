@@ -51,8 +51,8 @@
       /* ─── SLIDE ENGINE ─── */
       .deck {
         position: absolute;
-        width: 1255px;
-        height: 705px;
+        width: 1920px;
+        height: 1080px;
         top: 50%;
         left: 50%;
         transform-origin: center center;
@@ -70,8 +70,8 @@
         pointer-events: none;
         transition: opacity 0.5s cubic-bezier(0.4, 0, 0.2, 1);
         background: var(--bg);
-        width: 1255px;
-        height: 705px;
+        width: 1920px;
+        height: 1080px;
       }
       .slide.active {
         opacity: 1;
@@ -199,10 +199,10 @@
         justify-content: center;
         text-align: center;
         height: 100%;
-        padding: 60px;
+        padding: 90px;
       }
       .pad {
-        padding: 44px 56px;
+        padding: 68px 86px;
         height: 100%;
         display: flex;
         flex-direction: column;
@@ -213,18 +213,18 @@
       .kicker {
         display: inline-block;
         width: fit-content;
-        font-size: 11px;
+        font-size: 16px;
         font-weight: 700;
-        letter-spacing: 2px;
+        letter-spacing: 3px;
         text-transform: uppercase;
         color: var(--accent);
         background: var(--accent-light);
-        padding: 4px 14px;
-        border-radius: 20px;
-        margin-bottom: 14px;
+        padding: 6px 22px;
+        border-radius: 24px;
+        margin-bottom: 20px;
       }
       h1 {
-        font-size: clamp(36px, 5vw, 60px);
+        font-size: clamp(54px, 5vw, 90px);
         font-weight: 900;
         line-height: 1.1;
         letter-spacing: -0.5px;
@@ -235,10 +235,10 @@
         color: var(--accent);
       }
       h2 {
-        font-size: clamp(24px, 3vw, 36px);
+        font-size: clamp(36px, 3vw, 54px);
         font-weight: 800;
         line-height: 1.2;
-        margin-bottom: 28px;
+        margin-bottom: 42px;
         color: var(--text);
       }
       h2 em {
@@ -246,30 +246,30 @@
         color: var(--accent);
       }
       .sub {
-        font-size: clamp(14px, 1.5vw, 18px);
+        font-size: clamp(20px, 1.5vw, 27px);
         color: var(--text2);
         font-weight: 400;
         line-height: 1.7;
-        max-width: 560px;
+        max-width: 860px;
       }
 
       /* ─── GRIDS ─── */
       .g2 {
         display: grid;
         grid-template-columns: 1fr 1fr;
-        gap: 20px;
+        gap: 30px;
         width: 100%;
       }
       .g3 {
         display: grid;
         grid-template-columns: 1fr 1fr 1fr;
-        gap: 16px;
+        gap: 24px;
         width: 100%;
       }
       .g5 {
         display: grid;
         grid-template-columns: 1fr;
-        gap: 12px;
+        gap: 18px;
         width: 100%;
       }
 
@@ -277,48 +277,48 @@
       .card {
         background: var(--bg2);
         border: 1px solid var(--border);
-        border-radius: 14px;
-        padding: 24px;
+        border-radius: 20px;
+        padding: 36px;
         transition: all 0.25s;
       }
       .card:hover {
         border-color: var(--border2);
-        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.05);
-        transform: translateY(-2px);
+        box-shadow: 0 6px 24px rgba(0, 0, 0, 0.05);
+        transform: translateY(-3px);
       }
       .card .ico {
-        font-size: 28px;
-        margin-bottom: 8px;
+        font-size: 42px;
+        margin-bottom: 12px;
         display: block;
       }
       .card h3 {
-        font-size: 15px;
+        font-size: 22px;
         font-weight: 700;
-        margin-bottom: 5px;
+        margin-bottom: 8px;
         color: var(--text);
       }
       .card p,
       .card li {
-        font-size: 13px;
+        font-size: 18px;
         color: var(--text2);
-        line-height: 1.65;
+        line-height: 1.7;
       }
       .card ul {
         list-style: none;
         padding: 0;
       }
       .card ul li {
-        padding: 3px 0;
-        padding-left: 18px;
+        padding: 4px 0;
+        padding-left: 26px;
         position: relative;
       }
       .card ul li::before {
         content: '';
         position: absolute;
         left: 0;
-        top: 10px;
-        width: 6px;
-        height: 6px;
+        top: 14px;
+        width: 9px;
+        height: 9px;
         border-radius: 50%;
         background: var(--accent);
         opacity: 0.5;
@@ -326,53 +326,53 @@
 
       /* colored top-line cards */
       .card.ca {
-        border-top: 3px solid var(--accent);
+        border-top: 4px solid var(--accent);
       }
       .card.cg {
-        border-top: 3px solid var(--green);
+        border-top: 4px solid var(--green);
       }
       .card.co {
-        border-top: 3px solid var(--orange);
+        border-top: 4px solid var(--orange);
       }
       .card.cp {
-        border-top: 3px solid var(--purple);
+        border-top: 4px solid var(--purple);
       }
 
       /* ─── OBJ ITEM (objective row) ─── */
       .obj {
         display: flex;
         align-items: center;
-        gap: 16px;
+        gap: 24px;
         background: var(--bg2);
         border: 1px solid var(--border);
-        border-radius: 12px;
-        padding: 16px 20px;
+        border-radius: 16px;
+        padding: 24px 30px;
         transition: all 0.25s;
       }
       .obj:hover {
         border-color: var(--border2);
-        box-shadow: 0 2px 12px rgba(0, 0, 0, 0.04);
+        box-shadow: 0 3px 16px rgba(0, 0, 0, 0.04);
       }
       .obj .on {
-        width: 36px;
-        height: 36px;
-        border-radius: 10px;
+        width: 54px;
+        height: 54px;
+        border-radius: 14px;
         display: flex;
         align-items: center;
         justify-content: center;
-        font-size: 16px;
+        font-size: 24px;
         font-weight: 800;
         color: #fff;
         flex-shrink: 0;
       }
       .obj h4 {
-        font-size: 14px;
+        font-size: 21px;
         font-weight: 700;
         color: var(--text);
-        margin-bottom: 1px;
+        margin-bottom: 2px;
       }
       .obj p {
-        font-size: 12px;
+        font-size: 17px;
         color: var(--text2);
         line-height: 1.5;
       }
@@ -381,9 +381,9 @@
       .user-row {
         display: flex;
         align-items: center;
-        gap: 12px;
-        padding: 10px 16px;
-        border-radius: 10px;
+        gap: 18px;
+        padding: 16px 24px;
+        border-radius: 14px;
         background: var(--bg2);
         border: 1px solid var(--border);
         transition: all 0.25s;
@@ -392,39 +392,39 @@
         border-color: var(--border2);
       }
       .user-row .ua {
-        width: 34px;
-        height: 34px;
-        border-radius: 10px;
+        width: 52px;
+        height: 52px;
+        border-radius: 14px;
         display: flex;
         align-items: center;
         justify-content: center;
-        font-size: 18px;
+        font-size: 26px;
         flex-shrink: 0;
       }
       .user-row h4 {
-        font-size: 13px;
+        font-size: 19px;
         font-weight: 600;
         color: var(--text);
       }
       .user-row p {
-        font-size: 11px;
+        font-size: 16px;
         color: var(--text3);
       }
 
       .benefit {
         display: flex;
         align-items: flex-start;
-        gap: 10px;
-        padding: 8px 0;
+        gap: 14px;
+        padding: 12px 0;
       }
       .benefit .ck {
         color: var(--green);
-        font-size: 18px;
+        font-size: 26px;
         flex-shrink: 0;
-        margin-top: 1px;
+        margin-top: 2px;
       }
       .benefit p {
-        font-size: 13px;
+        font-size: 19px;
         color: var(--text2);
         line-height: 1.5;
       }
@@ -433,17 +433,17 @@
       .tl {
         display: flex;
         flex-direction: column;
-        gap: 8px;
+        gap: 12px;
         width: 100%;
       }
       .ti {
         display: flex;
         align-items: center;
-        gap: 12px;
+        gap: 18px;
       }
       .ti .tw {
-        min-width: 90px;
-        font-size: 11px;
+        min-width: 136px;
+        font-size: 16px;
         font-weight: 700;
         color: var(--accent);
         text-align: right;
@@ -453,15 +453,15 @@
         flex: 1;
         background: var(--bg2);
         border: 1px solid var(--border);
-        border-radius: 8px;
-        padding: 8px 14px;
-        font-size: 12px;
+        border-radius: 12px;
+        padding: 12px 20px;
+        font-size: 18px;
         color: var(--text2);
         transition: all 0.25s;
       }
       .ti .tb:hover {
         border-color: var(--border2);
-        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+        box-shadow: 0 3px 12px rgba(0, 0, 0, 0.04);
       }
       .ti .tb strong {
         color: var(--text);
@@ -471,14 +471,14 @@
       /* ─── TAGS ─── */
       .tags {
         display: flex;
-        gap: 8px;
+        gap: 12px;
         flex-wrap: wrap;
-        margin-top: 20px;
+        margin-top: 30px;
       }
       .tag {
-        padding: 6px 16px;
+        padding: 9px 24px;
         border-radius: 30px;
-        font-size: 12px;
+        font-size: 18px;
         font-weight: 500;
         background: var(--bg2);
         border: 1px solid var(--border);
@@ -499,24 +499,25 @@
         justify-content: center;
       }
       .cover-deco .big-icon {
-        font-size: 200px;
-        opacity: 0.65;
+        width: 300px;
+        height: 300px;
+        opacity: 0.85;
       }
       .cover-left {
         position: relative;
         z-index: 1;
         max-width: 55%;
-        padding: 60px;
+        padding: 90px;
       }
       .date-tag {
         display: inline-block;
-        font-size: 12px;
+        font-size: 18px;
         color: var(--text3);
         background: var(--bg2);
-        padding: 5px 14px;
-        border-radius: 20px;
+        padding: 8px 22px;
+        border-radius: 24px;
         border: 1px solid var(--border);
-        margin-top: 20px;
+        margin-top: 30px;
       }
 
       /* ─── RESPONSIVE ─── */
@@ -561,9 +562,9 @@
       /* ─── SLIDE LOGO ─── */
       .slide-logo {
         position: absolute;
-        top: 24px;
-        right: 36px;
-        height: 72px;
+        top: 36px;
+        right: 52px;
+        height: 110px;
         opacity: 1;
         z-index: 10;
       }
@@ -609,14 +610,24 @@
 
       /* ─── PRINT / PDF ─── */
       @media print {
-        body { background: #fff !important; overflow: visible !important; }
-        .dl-wrap, .nav, .progress { display: none !important; }
+        body {
+          background: #fff !important;
+          overflow: visible !important;
+        }
+        .dl-wrap,
+        .nav,
+        .progress {
+          display: none !important;
+        }
         .deck {
           position: relative !important;
-          top: auto !important; left: auto !important;
+          top: auto !important;
+          left: auto !important;
           transform: none !important;
-          width: 100% !important; height: auto !important;
-          box-shadow: none !important; border-radius: 0 !important;
+          width: 100% !important;
+          height: auto !important;
+          box-shadow: none !important;
+          border-radius: 0 !important;
           overflow: visible !important;
         }
         .slide {
@@ -625,12 +636,17 @@
           pointer-events: all !important;
           width: 100% !important;
           height: auto !important;
-          min-height: 705px;
+          min-height: 1080px;
           page-break-after: always;
           break-after: page;
         }
-        .slide .fu { opacity: 1 !important; transform: none !important; }
-        .slide-logo { position: absolute; }
+        .slide .fu {
+          opacity: 1 !important;
+          transform: none !important;
+        }
+        .slide-logo {
+          position: absolute;
+        }
       }
       @page {
         size: landscape;
@@ -639,12 +655,12 @@
 
       /* ─── SECTION LABEL ─── */
       .sec-label {
-        font-size: 12px;
+        font-size: 18px;
         font-weight: 600;
         color: var(--text3);
         text-transform: uppercase;
-        letter-spacing: 1.5px;
-        margin-bottom: 10px;
+        letter-spacing: 2px;
+        margin-bottom: 16px;
       }
     </style>
   </head>
@@ -658,7 +674,13 @@
         style="display: flex; flex-direction: row; position: absolute"
       >
         <img src="logo-Biccorp.png" class="slide-logo" alt="BicCorp" />
-        <div class="cover-deco"><span class="big-icon">🐷</span></div>
+        <div class="cover-deco">
+          <img
+            class="big-icon"
+            src="https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/svg/1f437.svg"
+            alt="pig"
+          />
+        </div>
         <div
           class="cover-left"
           style="
@@ -967,9 +989,9 @@
       <!-- ══════════ SLIDE 6 : แผนดำเนินงาน (Timeline) ══════════ -->
       <div class="slide">
         <img src="logo-Biccorp.png" class="slide-logo" alt="BicCorp" />
-        <div class="pad" style="padding: 36px 48px">
+        <div class="pad" style="padding: 56px 74px">
           <span class="kicker fu">Slide 6/6</span>
-          <h2 class="fu" style="margin-bottom: 36px">
+          <h2 class="fu" style="margin-bottom: 48px">
             แผนการดำเนินงานโครงการ — <em>รวม 22 สัปดาห์</em>
           </h2>
 
@@ -979,12 +1001,12 @@
             <div
               style="
                 position: absolute;
-                top: 20px;
-                left: 24px;
-                right: 24px;
-                height: 3px;
+                top: 32px;
+                left: 36px;
+                right: 36px;
+                height: 5px;
                 background: var(--bg3);
-                border-radius: 2px;
+                border-radius: 3px;
                 z-index: 0;
               "
             >
@@ -999,7 +1021,7 @@
                     var(--orange),
                     var(--purple)
                   );
-                  border-radius: 2px;
+                  border-radius: 3px;
                 "
               ></div>
             </div>
@@ -1013,34 +1035,33 @@
                 z-index: 1;
               "
             >
-              <!-- Station 1 -->
               <div
                 style="
                   display: flex;
                   flex-direction: column;
                   align-items: center;
-                  width: 120px;
+                  width: 185px;
                 "
               >
                 <div
                   style="
-                    width: 42px;
-                    height: 42px;
+                    width: 64px;
+                    height: 64px;
                     border-radius: 50%;
                     background: var(--accent);
                     display: flex;
                     align-items: center;
                     justify-content: center;
-                    border: 4px solid #fff;
-                    box-shadow: 0 2px 8px rgba(37, 99, 235, 0.3);
+                    border: 5px solid #fff;
+                    box-shadow: 0 3px 12px rgba(37, 99, 235, 0.3);
                   "
                 >
-                  <span style="font-size: 18px">🚀</span>
+                  <span style="font-size: 28px">🚀</span>
                 </div>
-                <div style="margin-top: 12px; text-align: center">
+                <div style="margin-top: 18px; text-align: center">
                   <div
                     style="
-                      font-size: 10px;
+                      font-size: 15px;
                       font-weight: 700;
                       color: var(--accent);
                       letter-spacing: 0.5px;
@@ -1050,20 +1071,20 @@
                   </div>
                   <div
                     style="
-                      font-size: 12px;
+                      font-size: 18px;
                       font-weight: 700;
                       color: var(--text);
-                      margin-top: 2px;
+                      margin-top: 3px;
                     "
                   >
                     Kickoff
                   </div>
                   <div
                     style="
-                      font-size: 10px;
+                      font-size: 15px;
                       color: var(--text3);
-                      line-height: 1.4;
-                      margin-top: 2px;
+                      line-height: 1.5;
+                      margin-top: 3px;
                     "
                   >
                     Requirement<br />ออกแบบ DB<br />ตั้ง Repo/CI
@@ -1071,34 +1092,33 @@
                 </div>
               </div>
 
-              <!-- Station 2 -->
               <div
                 style="
                   display: flex;
                   flex-direction: column;
                   align-items: center;
-                  width: 120px;
+                  width: 185px;
                 "
               >
                 <div
                   style="
-                    width: 42px;
-                    height: 42px;
+                    width: 64px;
+                    height: 64px;
                     border-radius: 50%;
                     background: var(--accent);
                     display: flex;
                     align-items: center;
                     justify-content: center;
-                    border: 4px solid #fff;
-                    box-shadow: 0 2px 8px rgba(37, 99, 235, 0.3);
+                    border: 5px solid #fff;
+                    box-shadow: 0 3px 12px rgba(37, 99, 235, 0.3);
                   "
                 >
-                  <span style="font-size: 18px">🔐</span>
+                  <span style="font-size: 28px">🔐</span>
                 </div>
-                <div style="margin-top: 12px; text-align: center">
+                <div style="margin-top: 18px; text-align: center">
                   <div
                     style="
-                      font-size: 10px;
+                      font-size: 15px;
                       font-weight: 700;
                       color: var(--accent);
                       letter-spacing: 0.5px;
@@ -1108,20 +1128,20 @@
                   </div>
                   <div
                     style="
-                      font-size: 12px;
+                      font-size: 18px;
                       font-weight: 700;
                       color: var(--text);
-                      margin-top: 2px;
+                      margin-top: 3px;
                     "
                   >
                     Auth + Master
                   </div>
                   <div
                     style="
-                      font-size: 10px;
+                      font-size: 15px;
                       color: var(--text3);
-                      line-height: 1.4;
-                      margin-top: 2px;
+                      line-height: 1.5;
+                      margin-top: 3px;
                     "
                   >
                     RBAC, Scope<br />Master Data<br />Facility Nodes
@@ -1129,34 +1149,33 @@
                 </div>
               </div>
 
-              <!-- Station 3 -->
               <div
                 style="
                   display: flex;
                   flex-direction: column;
                   align-items: center;
-                  width: 120px;
+                  width: 185px;
                 "
               >
                 <div
                   style="
-                    width: 42px;
-                    height: 42px;
+                    width: 64px;
+                    height: 64px;
                     border-radius: 50%;
                     background: var(--accent);
                     display: flex;
                     align-items: center;
                     justify-content: center;
-                    border: 4px solid #fff;
-                    box-shadow: 0 2px 8px rgba(37, 99, 235, 0.3);
+                    border: 5px solid #fff;
+                    box-shadow: 0 3px 12px rgba(37, 99, 235, 0.3);
                   "
                 >
-                  <span style="font-size: 18px">🛒</span>
+                  <span style="font-size: 28px">🛒</span>
                 </div>
-                <div style="margin-top: 12px; text-align: center">
+                <div style="margin-top: 18px; text-align: center">
                   <div
                     style="
-                      font-size: 10px;
+                      font-size: 15px;
                       font-weight: 700;
                       color: var(--accent);
                       letter-spacing: 0.5px;
@@ -1166,20 +1185,20 @@
                   </div>
                   <div
                     style="
-                      font-size: 12px;
+                      font-size: 18px;
                       font-weight: 700;
                       color: var(--text);
-                      margin-top: 2px;
+                      margin-top: 3px;
                     "
                   >
                     Purchase
                   </div>
                   <div
                     style="
-                      font-size: 10px;
+                      font-size: 15px;
                       color: var(--text3);
-                      line-height: 1.4;
-                      margin-top: 2px;
+                      line-height: 1.5;
+                      margin-top: 3px;
                     "
                   >
                     PR + อนุมัติ<br />Buffer<br />Hardening
@@ -1187,34 +1206,33 @@
                 </div>
               </div>
 
-              <!-- Station 4 -->
               <div
                 style="
                   display: flex;
                   flex-direction: column;
                   align-items: center;
-                  width: 120px;
+                  width: 185px;
                 "
               >
                 <div
                   style="
-                    width: 42px;
-                    height: 42px;
+                    width: 64px;
+                    height: 64px;
                     border-radius: 50%;
                     background: var(--green);
                     display: flex;
                     align-items: center;
                     justify-content: center;
-                    border: 4px solid #fff;
-                    box-shadow: 0 2px 8px rgba(5, 150, 105, 0.3);
+                    border: 5px solid #fff;
+                    box-shadow: 0 3px 12px rgba(5, 150, 105, 0.3);
                   "
                 >
-                  <span style="font-size: 18px">📦</span>
+                  <span style="font-size: 28px">📦</span>
                 </div>
-                <div style="margin-top: 12px; text-align: center">
+                <div style="margin-top: 18px; text-align: center">
                   <div
                     style="
-                      font-size: 10px;
+                      font-size: 15px;
                       font-weight: 700;
                       color: var(--green);
                       letter-spacing: 0.5px;
@@ -1224,20 +1242,20 @@
                   </div>
                   <div
                     style="
-                      font-size: 12px;
+                      font-size: 18px;
                       font-weight: 700;
                       color: var(--text);
-                      margin-top: 2px;
+                      margin-top: 3px;
                     "
                   >
                     Warehouse
                   </div>
                   <div
                     style="
-                      font-size: 10px;
+                      font-size: 15px;
                       color: var(--text3);
-                      line-height: 1.4;
-                      margin-top: 2px;
+                      line-height: 1.5;
+                      margin-top: 3px;
                     "
                   >
                     รับ/โอน/เบิก<br />Lot & Expiry<br />Traceability
@@ -1245,34 +1263,33 @@
                 </div>
               </div>
 
-              <!-- Station 5 -->
               <div
                 style="
                   display: flex;
                   flex-direction: column;
                   align-items: center;
-                  width: 120px;
+                  width: 185px;
                 "
               >
                 <div
                   style="
-                    width: 42px;
-                    height: 42px;
+                    width: 64px;
+                    height: 64px;
                     border-radius: 50%;
                     background: var(--green);
                     display: flex;
                     align-items: center;
                     justify-content: center;
-                    border: 4px solid #fff;
-                    box-shadow: 0 2px 8px rgba(5, 150, 105, 0.3);
+                    border: 5px solid #fff;
+                    box-shadow: 0 3px 12px rgba(5, 150, 105, 0.3);
                   "
                 >
-                  <span style="font-size: 18px">🐷</span>
+                  <span style="font-size: 28px">🐷</span>
                 </div>
-                <div style="margin-top: 12px; text-align: center">
+                <div style="margin-top: 18px; text-align: center">
                   <div
                     style="
-                      font-size: 10px;
+                      font-size: 15px;
                       font-weight: 700;
                       color: var(--green);
                       letter-spacing: 0.5px;
@@ -1282,20 +1299,20 @@
                   </div>
                   <div
                     style="
-                      font-size: 12px;
+                      font-size: 18px;
                       font-weight: 700;
                       color: var(--text);
-                      margin-top: 2px;
+                      margin-top: 3px;
                     "
                   >
                     Production
                   </div>
                   <div
                     style="
-                      font-size: 10px;
+                      font-size: 15px;
                       color: var(--text3);
-                      line-height: 1.4;
-                      margin-top: 2px;
+                      line-height: 1.5;
+                      margin-top: 3px;
                     "
                   >
                     Batch + Vaccine<br />ตาย/น้ำหนัก<br />แผนวัคซีน
@@ -1303,34 +1320,33 @@
                 </div>
               </div>
 
-              <!-- Station 6 -->
               <div
                 style="
                   display: flex;
                   flex-direction: column;
                   align-items: center;
-                  width: 120px;
+                  width: 185px;
                 "
               >
                 <div
                   style="
-                    width: 42px;
-                    height: 42px;
+                    width: 64px;
+                    height: 64px;
                     border-radius: 50%;
                     background: var(--orange);
                     display: flex;
                     align-items: center;
                     justify-content: center;
-                    border: 4px solid #fff;
-                    box-shadow: 0 2px 8px rgba(217, 119, 6, 0.3);
+                    border: 5px solid #fff;
+                    box-shadow: 0 3px 12px rgba(217, 119, 6, 0.3);
                   "
                 >
-                  <span style="font-size: 18px">💰</span>
+                  <span style="font-size: 28px">💰</span>
                 </div>
-                <div style="margin-top: 12px; text-align: center">
+                <div style="margin-top: 18px; text-align: center">
                   <div
                     style="
-                      font-size: 10px;
+                      font-size: 15px;
                       font-weight: 700;
                       color: var(--orange);
                       letter-spacing: 0.5px;
@@ -1340,20 +1356,20 @@
                   </div>
                   <div
                     style="
-                      font-size: 12px;
+                      font-size: 18px;
                       font-weight: 700;
                       color: var(--text);
-                      margin-top: 2px;
+                      margin-top: 3px;
                     "
                   >
                     Sale
                   </div>
                   <div
                     style="
-                      font-size: 10px;
+                      font-size: 15px;
                       color: var(--text3);
-                      line-height: 1.4;
-                      margin-top: 2px;
+                      line-height: 1.5;
+                      margin-top: 3px;
                     "
                   >
                     SO → Delivery<br />ชั่ง → Invoice<br />Dashboard
@@ -1361,34 +1377,33 @@
                 </div>
               </div>
 
-              <!-- Station 7 -->
               <div
                 style="
                   display: flex;
                   flex-direction: column;
                   align-items: center;
-                  width: 120px;
+                  width: 185px;
                 "
               >
                 <div
                   style="
-                    width: 42px;
-                    height: 42px;
+                    width: 64px;
+                    height: 64px;
                     border-radius: 50%;
                     background: var(--orange);
                     display: flex;
                     align-items: center;
                     justify-content: center;
-                    border: 4px solid #fff;
-                    box-shadow: 0 2px 8px rgba(217, 119, 6, 0.3);
+                    border: 5px solid #fff;
+                    box-shadow: 0 3px 12px rgba(217, 119, 6, 0.3);
                   "
                 >
-                  <span style="font-size: 18px">🔧</span>
+                  <span style="font-size: 28px">🔧</span>
                 </div>
-                <div style="margin-top: 12px; text-align: center">
+                <div style="margin-top: 18px; text-align: center">
                   <div
                     style="
-                      font-size: 10px;
+                      font-size: 15px;
                       font-weight: 700;
                       color: var(--orange);
                       letter-spacing: 0.5px;
@@ -1398,20 +1413,20 @@
                   </div>
                   <div
                     style="
-                      font-size: 12px;
+                      font-size: 18px;
                       font-weight: 700;
                       color: var(--text);
-                      margin-top: 2px;
+                      margin-top: 3px;
                     "
                   >
                     Maintenance
                   </div>
                   <div
                     style="
-                      font-size: 10px;
+                      font-size: 15px;
                       color: var(--text3);
-                      line-height: 1.4;
-                      margin-top: 2px;
+                      line-height: 1.5;
+                      margin-top: 3px;
                     "
                   >
                     แจ้งซ่อม<br />Work Order<br />เบิกอะไหล่
@@ -1419,34 +1434,33 @@
                 </div>
               </div>
 
-              <!-- Station 8 (finish) -->
               <div
                 style="
                   display: flex;
                   flex-direction: column;
                   align-items: center;
-                  width: 120px;
+                  width: 185px;
                 "
               >
                 <div
                   style="
-                    width: 42px;
-                    height: 42px;
+                    width: 64px;
+                    height: 64px;
                     border-radius: 50%;
                     background: var(--purple);
                     display: flex;
                     align-items: center;
                     justify-content: center;
-                    border: 4px solid #fff;
-                    box-shadow: 0 2px 8px rgba(124, 58, 237, 0.3);
+                    border: 5px solid #fff;
+                    box-shadow: 0 3px 12px rgba(124, 58, 237, 0.3);
                   "
                 >
-                  <span style="font-size: 18px">📊</span>
+                  <span style="font-size: 28px">📊</span>
                 </div>
-                <div style="margin-top: 12px; text-align: center">
+                <div style="margin-top: 18px; text-align: center">
                   <div
                     style="
-                      font-size: 10px;
+                      font-size: 15px;
                       font-weight: 700;
                       color: var(--purple);
                       letter-spacing: 0.5px;
@@ -1456,20 +1470,20 @@
                   </div>
                   <div
                     style="
-                      font-size: 12px;
+                      font-size: 18px;
                       font-weight: 700;
                       color: var(--text);
-                      margin-top: 2px;
+                      margin-top: 3px;
                     "
                   >
                     Finance
                   </div>
                   <div
                     style="
-                      font-size: 10px;
+                      font-size: 15px;
                       color: var(--text3);
-                      line-height: 1.4;
-                      margin-top: 2px;
+                      line-height: 1.5;
+                      margin-top: 3px;
                     "
                   >
                     ต้นทุน/กำไร<br />ปิดรุ่น<br />🏁 Go Live
@@ -1484,8 +1498,8 @@
             class="fu"
             style="
               display: flex;
-              gap: 12px;
-              margin-top: 32px;
+              gap: 18px;
+              margin-top: 48px;
               justify-content: center;
             "
           >
@@ -1493,22 +1507,22 @@
               style="
                 display: flex;
                 align-items: center;
-                gap: 6px;
+                gap: 10px;
                 background: var(--accent-light);
-                padding: 6px 16px;
-                border-radius: 20px;
+                padding: 10px 24px;
+                border-radius: 24px;
               "
             >
               <div
                 style="
-                  width: 10px;
-                  height: 10px;
+                  width: 14px;
+                  height: 14px;
                   border-radius: 50%;
                   background: var(--accent);
                 "
               ></div>
               <span
-                style="font-size: 11px; font-weight: 600; color: var(--accent)"
+                style="font-size: 16px; font-weight: 600; color: var(--accent)"
                 >Phase 1 — พื้นฐาน (Wk 1–8)</span
               >
             </div>
@@ -1516,22 +1530,22 @@
               style="
                 display: flex;
                 align-items: center;
-                gap: 6px;
+                gap: 10px;
                 background: var(--green-light);
-                padding: 6px 16px;
-                border-radius: 20px;
+                padding: 10px 24px;
+                border-radius: 24px;
               "
             >
               <div
                 style="
-                  width: 10px;
-                  height: 10px;
+                  width: 14px;
+                  height: 14px;
                   border-radius: 50%;
                   background: var(--green);
                 "
               ></div>
               <span
-                style="font-size: 11px; font-weight: 600; color: var(--green)"
+                style="font-size: 16px; font-weight: 600; color: var(--green)"
                 >Phase 2 — คลัง+ผลิต (Wk 9–17)</span
               >
             </div>
@@ -1539,22 +1553,22 @@
               style="
                 display: flex;
                 align-items: center;
-                gap: 6px;
+                gap: 10px;
                 background: var(--orange-light);
-                padding: 6px 16px;
-                border-radius: 20px;
+                padding: 10px 24px;
+                border-radius: 24px;
               "
             >
               <div
                 style="
-                  width: 10px;
-                  height: 10px;
+                  width: 14px;
+                  height: 14px;
                   border-radius: 50%;
                   background: var(--orange);
                 "
               ></div>
               <span
-                style="font-size: 11px; font-weight: 600; color: var(--orange)"
+                style="font-size: 16px; font-weight: 600; color: var(--orange)"
                 >Phase 3 — ขาย+ซ่อม (Wk 18–21)</span
               >
             </div>
@@ -1562,22 +1576,22 @@
               style="
                 display: flex;
                 align-items: center;
-                gap: 6px;
+                gap: 10px;
                 background: var(--purple-light);
-                padding: 6px 16px;
-                border-radius: 20px;
+                padding: 10px 24px;
+                border-radius: 24px;
               "
             >
               <div
                 style="
-                  width: 10px;
-                  height: 10px;
+                  width: 14px;
+                  height: 14px;
                   border-radius: 50%;
                   background: var(--purple);
                 "
               ></div>
               <span
-                style="font-size: 11px; font-weight: 600; color: var(--purple)"
+                style="font-size: 16px; font-weight: 600; color: var(--purple)"
                 >Finish — การเงิน (Wk 22)</span
               >
             </div>
@@ -1588,62 +1602,62 @@
             class="fu"
             style="
               display: flex;
-              gap: 10px;
-              margin-top: 20px;
+              gap: 16px;
+              margin-top: 30px;
               justify-content: center;
             "
           >
             <span
               style="
-                font-size: 11px;
+                font-size: 17px;
                 color: var(--text3);
                 font-weight: 600;
                 display: flex;
                 align-items: center;
-                gap: 4px;
+                gap: 6px;
               "
               >Tech Stack:</span
             >
             <span
               style="
-                font-size: 11px;
+                font-size: 17px;
                 background: var(--bg2);
                 border: 1px solid var(--border);
-                padding: 4px 12px;
-                border-radius: 16px;
+                padding: 6px 18px;
+                border-radius: 20px;
                 color: var(--text2);
               "
               >⚛️ Next.js</span
             >
             <span
               style="
-                font-size: 11px;
+                font-size: 17px;
                 background: var(--bg2);
                 border: 1px solid var(--border);
-                padding: 4px 12px;
-                border-radius: 16px;
+                padding: 6px 18px;
+                border-radius: 20px;
                 color: var(--text2);
               "
               >🔷 .NET 10</span
             >
             <span
               style="
-                font-size: 11px;
+                font-size: 17px;
                 background: var(--bg2);
                 border: 1px solid var(--border);
-                padding: 4px 12px;
-                border-radius: 16px;
+                padding: 6px 18px;
+                border-radius: 20px;
                 color: var(--text2);
               "
               >🐘 PostgreSQL</span
             >
             <span
               style="
-                font-size: 11px;
+                font-size: 17px;
                 background: var(--bg2);
                 border: 1px solid var(--border);
-                padding: 4px 12px;
-                border-radius: 16px;
+                padding: 6px 18px;
+                border-radius: 20px;
                 color: var(--text2);
               "
               >🐳 Docker</span
@@ -1656,11 +1670,35 @@
     <!-- DOWNLOAD BUTTONS -->
     <div class="dl-wrap">
       <button class="dl-btn" onclick="exportPPTX()">
-        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v2a2 2 0 002 2h12a2 2 0 002-2v-2M7 10l5 5 5-5M12 15V3"/></svg>
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+          stroke-width="2"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            d="M4 16v2a2 2 0 002 2h12a2 2 0 002-2v-2M7 10l5 5 5-5M12 15V3"
+          />
+        </svg>
         PPTX
       </button>
       <button class="dl-btn pdf" onclick="exportPDF()">
-        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z"/></svg>
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+          stroke-width="2"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z"
+          />
+        </svg>
         PDF
       </button>
     </div>
@@ -1677,8 +1715,8 @@
       // Auto-scale deck to fit viewport
       const deck = document.getElementById('deck');
       function scaleDeck() {
-        const sw = 1255,
-          sh = 720;
+        const sw = 1920,
+          sh = 1080;
         const vw = window.innerWidth,
           vh = window.innerHeight - 80; // 80px for nav
         const s = Math.min(vw / sw, vh / sh, 1); // never scale up past 1
@@ -2445,7 +2483,9 @@
         );
 
         // ─── EXPORT ───
-        await pptx.writeFile({ fileName: 'JBFarmHUB_PPTX-ระบบจัดการฟาร์ม.pptx' });
+        await pptx.writeFile({
+          fileName: 'JBFarmHUB_PPTX-ระบบจัดการฟาร์ม.pptx',
+        });
       }
 
       function exportPDF() {
@@ -2453,14 +2493,16 @@
         document.title = 'JBFarmHUB_PDF-ระบบจัดการฟาร์ม';
         // Show all slides for printing
         const allSlides = document.querySelectorAll('.slide');
-        allSlides.forEach(s => s.classList.add('active'));
+        allSlides.forEach((s) => s.classList.add('active'));
         // Trigger print dialog (user can Save as PDF)
         setTimeout(() => {
           window.print();
           // Restore after print
           setTimeout(() => {
             document.title = origTitle;
-            allSlides.forEach((s, i) => s.classList.toggle('active', i === cur));
+            allSlides.forEach((s, i) =>
+              s.classList.toggle('active', i === cur),
+            );
           }, 500);
         }, 200);
       }

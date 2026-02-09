@@ -10,15 +10,16 @@
 | รายการ | รายละเอียด |
 |--------|------------|
 | ไฟล์หลัก | `present.html` — HTML ไฟล์เดียว (self-contained) |
-| ขนาดสไลด์ | 1255 x 705 px (ใกล้เคียง 16:9) |
+| ขนาดสไลด์ | **1920 x 1080 px** (Full HD 16:9) — capture แล้วคมชัดไม่แตก |
 | โทนสี | ขาว-เทา สะอาดตา (สำหรับผู้บริหาร) |
-| ฟอนต์ | Noto Sans Thai + Inter (Google Fonts) |
+| ฟอนต์ | **Sarabun** + Inter (Google Fonts) — คล้าย TH SarabunPSK |
 | พื้นหลังนอกสไลด์ | สีดำ (#111111) |
 | Navigation | ปุ่มซ้าย/ขวา, Dots, Keyboard (←→ Space Home End), Touch Swipe, F=Fullscreen |
 | Export PPTX | PptxGenJS สร้าง .pptx จริงฝั่ง client → `JBFarmHUB_PPTX-ระบบจัดการฟาร์ม.pptx` |
 | Export PDF | window.print() → Save as PDF → `JBFarmHUB_PDF-ระบบจัดการฟาร์ม.pdf` |
-| Auto-scale | สไลด์ย่อ/ขยายพอดีจออัตโนมัติ |
-| โลโก้ | แสดงมุมบนขวาทุกสไลด์ (class `.slide-logo`) |
+| Auto-scale | สไลด์ย่อ/ขยายพอดีจออัตโนมัติ (ไม่ขยายเกิน 1:1) |
+| โลโก้ | แสดงมุมบนขวาทุกสไลด์ (class `.slide-logo`, height 110px) |
+| ภาพหน้าปก | ใช้ไฟล์ภาพ PNG แทน emoji (ไม่แตกเมื่อขยาย) |
 
 ---
 
@@ -28,11 +29,11 @@
 <!DOCTYPE html>
 <html lang="th">
 <head>
-  <!-- Google Fonts: Noto Sans Thai + Inter -->
+  <!-- Google Fonts: Sarabun + Inter -->
   <!-- CSS ทั้งหมดอยู่ใน <style> รวม @media print สำหรับ PDF -->
 </head>
 <body>
-  <!-- DECK: กล่องสไลด์ขนาดคงที่ อยู่กลางจอ -->
+  <!-- DECK: กล่องสไลด์ขนาดคงที่ 1920x1080 อยู่กลางจอ -->
   <div class="deck" id="deck">
     <div class="progress" id="prog"></div>   <!-- แถบ progress bar -->
 
@@ -96,26 +97,28 @@
 
 | Class | หน้าที่ |
 |-------|---------|
-| `.deck` | กล่องสไลด์ขนาดคงที่ อยู่กลางจอ มี auto-scale |
+| `.deck` | กล่องสไลด์ 1920x1080 อยู่กลางจอ มี auto-scale |
 | `.slide` | สไลด์แต่ละหน้า (absolute ซ้อนกัน, opacity 0/1) |
 | `.slide.active` | สไลด์ที่แสดงอยู่ |
 | `.fu` | Fade-up animation (ใส่ให้ child elements) |
-| `.pad` | Padding layout สำหรับเนื้อหา |
+| `.pad` | Padding layout สำหรับเนื้อหา (68px 86px) |
 | `.center` | จัดกลางทั้งแนวตั้ง/นอน |
 | `.kicker` | ป้ายเล็กๆ มุมบน (เช่น "Slide 2/6") พื้นหลังพอดีข้อความ (`width: fit-content`) |
 | `.g2` `.g3` `.g5` | Grid 2/3/1 คอลัมน์ |
-| `.card` | การ์ดมีขอบ + hover effect |
-| `.card.ca` `.cg` `.co` `.cp` | การ์ดมีเส้นสีด้านบน (accent/green/orange/purple) |
-| `.obj` | แถววัตถุประสงค์ (วงกลมตัวเลข + ข้อความ) |
-| `.user-row` | แถวผู้ใช้งาน (ไอคอน + ชื่อ + คำอธิบาย) |
-| `.benefit` | แถวประโยชน์ (✔ + ข้อความ) |
-| `.slide-logo` | โลโก้บริษัทมุมบนขวาทุกสไลด์ (opacity: 1, height: 72px) |
-| `.cover-deco` | พื้นที่ตกแต่งฝั่งขวาของหน้าปก (clip-path เฉียง) |
+| `.card` | การ์ดมีขอบ + hover effect (padding 36px) |
+| `.card.ca` `.cg` `.co` `.cp` | การ์ดมีเส้นสีด้านบน (accent/green/orange/purple, border-top 4px) |
+| `.obj` | แถววัตถุประสงค์ (วงกลมตัวเลข 54px + ข้อความ) |
+| `.user-row` | แถวผู้ใช้งาน (ไอคอน 52px + ชื่อ + คำอธิบาย) |
+| `.benefit` | แถวประโยชน์ (✔ 26px + ข้อความ 19px) |
+| `.slide-logo` | โลโก้บริษัทมุมบนขวาทุกสไลด์ (height 110px, absolute) |
+| `.cover-deco` | พื้นที่ตกแต่งฝั่งขวาของหน้าปก (clip-path เฉียง, 45% width) |
+| `.big-icon` | ภาพหมูหน้าปก (300x300px, ใช้ไฟล์ PNG ไม่ใช่ emoji เพื่อไม่แตก) |
 | `.dl-wrap` | กลุ่มปุ่ม Download มุมบนขวาจอ (fixed) |
 | `.dl-btn` | ปุ่ม Download (hover น้ำเงิน) |
 | `.dl-btn.pdf` | ปุ่ม PDF (hover แดง) |
 | `.nav` | แถบ Navigation ด้านล่าง (พื้นเข้ม, blur) |
 | `.progress` | Progress bar ด้านบนสไลด์ |
+| `.sec-label` | หัวหมวดย่อย (18px, uppercase, letter-spacing) |
 
 ---
 
@@ -126,16 +129,17 @@
 ┌─────────────────────────────┬──────────────┐
 │ [LOGO มุมบนขวา]             │              │
 │                              │              │
-│  [kicker: การนำเสนอ...]     │   🐷 (ใหญ่)  │
-│  [h1: ชื่อระบบ]              │   (พื้นเทา)  │
-│  [h2: คำอธิบาย]              │              │
+│  [kicker: การนำเสนอ...]     │  🐷 (ภาพ PNG)│
+│  [h1: ชื่อระบบ]              │  300x300px   │
+│  [h2: คำอธิบาย]              │  (พื้นเทา)   │
 │  [sub: รายละเอียด]           │              │
 │  [date-tag: วันที่]          │              │
 │                              │              │
 └─────────────────────────────┴──────────────┘
 ```
-- ซ้าย 55%: เนื้อหา (`cover-left`) | ขวา 45%: `cover-deco` พื้นเทา + ไอคอนใหญ่ (200px, opacity 0.85)
+- ซ้าย 55%: เนื้อหา (`cover-left`, padding 90px) | ขวา 45%: `cover-deco` พื้นเทา + ภาพ PNG
 - ใช้ `clip-path: polygon()` ตัดขอบเฉียง
+- ภาพหน้าปกใช้ไฟล์ PNG (ไม่ใช่ emoji) เพื่อไม่แตกเมื่อขยาย
 
 ### Slide 2: วัตถุประสงค์ (5 ข้อ)
 ```
@@ -143,14 +147,14 @@
 │ [kicker] [LOGO]                            │
 │ [h2: หัวข้อ]                                │
 │                                            │
-│  [1] ●──── หัวข้อ ─────────────────────     │
-│            คำอธิบาย                         │
+│  [1] ●──── หัวข้อ (21px) ──────────────     │
+│            คำอธิบาย (17px)                  │
 │  [2] ●──── หัวข้อ ─────────────────────     │
 │            คำอธิบาย                         │
-│  ... (5 แถว)                               │
+│  ... (5 แถว, วงกลม 54px สีต่างกัน)        │
 └────────────────────────────────────────────┘
 ```
-- ใช้ class `.obj` — วงกลมตัวเลขสี (.on) + h4 + p
+- ใช้ class `.obj` — วงกลมตัวเลขสี (.on 54x54) + h4 (21px) + p (17px)
 - สีวงกลมต่างกัน: น้ำเงิน, เขียว, ส้ม, แดง, ม่วง
 
 ### Slide 3: ผู้ใช้งาน + ประโยชน์ (2 คอลัมน์)
@@ -166,9 +170,9 @@
 │ 👁️ ภายนอก      │                         │
 └──────────────────┴─────────────────────────┘
 ```
-- ซ้าย: `.user-row` (ไอคอน `.ua` + h4 + p)
-- ขวา: `.card` + `.benefit` (✔ `.ck` + p)
-- หัวคอลัมน์ใช้ `.sec-label`
+- ซ้าย: `.user-row` (ไอคอน `.ua` 52px + h4 19px + p 16px)
+- ขวา: `.card` + `.benefit` (✔ `.ck` 26px + p 19px)
+- หัวคอลัมน์ใช้ `.sec-label` (18px)
 
 ### Slide 4–5: โมดูล (2x2 การ์ด)
 ```
@@ -184,9 +188,9 @@
 │ ...             │ ...             │
 └──────────────────┴──────────────────┘
 ```
-- ใช้ `.g2` grid 2 คอลัมน์
-- `.card.ca` `.cg` `.co` `.cp` = เส้นสีด้านบนต่างกัน (border-top: 3px)
-- แต่ละการ์ด: `.ico` + h3 + ul li (จุดกลม accent ก่อน li ผ่าน ::before)
+- ใช้ `.g2` grid 2 คอลัมน์ (gap 30px)
+- `.card.ca` `.cg` `.co` `.cp` = เส้นสีด้านบนต่างกัน (border-top 4px)
+- แต่ละการ์ด: `.ico` (42px) + h3 (22px) + ul li (18px, จุดกลม 9px ก่อน li ผ่าน ::before)
 
 ### Slide 6: Timeline (แนวนอน จุดต่อจุด สไตล์ขนส่ง)
 ```
@@ -194,19 +198,20 @@
 │ [h2: แผนงาน 22 สัปดาห์]                     │
 │                                            │
 │  🚀──🔐──🛒──📦──🐷──💰──🔧──📊           │
-│  Wk1  Wk3  Wk6  Wk9  Wk13 Wk18 Wk20 Wk22 │
-│  Kick Auth Purc Ware Prod Sale Maint Fin   │
-│  ...  ...  ...  ...  ...  ...  ...   ...   │
+│  64px วงกลม, เส้น gradient 5px             │
+│  WK (15px) + ชื่อ (18px) + รายละเอียด (15px)│
 │                                            │
 │  ● Phase 1  ● Phase 2  ● Phase 3  ● Finish│
-│  Tech: Next.js | .NET 10 | PostgreSQL      │
+│  (pill 16px, dot 14px)                     │
+│  Tech: Next.js | .NET 10 | PostgreSQL (17px)│
 └────────────────────────────────────────────┘
 ```
-- เส้นแนวนอน gradient สี (accent→green→orange→purple)
-- 8 จุดวงกลม (42x42px, border ขาว 4px + box-shadow) มีไอคอน emoji
-- ใต้จุด: สัปดาห์ (สีตาม phase) + ชื่อ (bold) + รายละเอียด 3 บรรทัด
-- Legend: pill สี 4 Phase (วงกลมเล็ก + text)
-- Tech Stack: pill เล็กแนวนอน
+- เส้นแนวนอน gradient สี 5px (accent→green→orange→purple)
+- 8 จุดวงกลม 64px (border ขาว 5px + box-shadow) มีไอคอน emoji 28px
+- ช่องสถานี 185px กว้าง
+- ใต้จุด: สัปดาห์ (15px สี phase) + ชื่อ (18px bold) + รายละเอียด 3 บรรทัด (15px)
+- Legend: pill สี 4 Phase (dot 14px + text 16px)
+- Tech Stack: pill 17px แนวนอน
 - จุดสุดท้ายมี 🏁 Go Live
 
 ---
@@ -216,7 +221,7 @@
 ### Auto-scale
 ```javascript
 function scaleDeck() {
-  const sw = 1255, sh = 705;                // ขนาดสไลด์จริง
+  const sw = 1920, sh = 1080;               // ขนาดสไลด์จริง (Full HD)
   const vw = window.innerWidth;
   const vh = window.innerHeight - 80;        // เว้นพื้นที่ nav
   const s = Math.min(vw / sw, vh / sh, 1);  // ไม่ขยายเกิน 1:1
@@ -241,7 +246,7 @@ async function exportPPTX() {
   const pptx = new PptxGenJS();
   pptx.layout = 'LAYOUT_WIDE';  // 13.33 x 7.5 in
   // สร้างสไลด์ทีละหน้า ด้วย addText / addShape
-  // แต่ละสไลด์ recreate layout ใน PPTX format
+  // fontFace ใช้ 'Sarabun' ทุกจุด
   await pptx.writeFile({ fileName: 'JBFarmHUB_PPTX-ระบบจัดการฟาร์ม.pptx' });
 }
 ```
@@ -264,34 +269,36 @@ function exportPDF() {
 
 ## วิธีใช้กับโปรเจกต์ใหม่
 
-1. **คัดลอก** `present.html` + โลโก้ ไปโปรเจกต์ใหม่
+1. **คัดลอก** `present.html` + โลโก้ + ภาพหน้าปก ไปโปรเจกต์ใหม่
 2. **แก้เนื้อหา** ในแต่ละ `<div class="slide">` ตาม pattern ด้านบน
 3. **เปลี่ยนสี** ที่ `:root` CSS Variables
 4. **เปลี่ยนโลโก้** ที่ `<img class="slide-logo" src="...">`
-5. **เปลี่ยนขนาดสไลด์** ที่ `.deck` + `.slide` (width/height) + `scaleDeck()`
-6. **แก้ exportPPTX()** ให้ตรงกับเนื้อหาใหม่
-7. **แก้ชื่อไฟล์ดาวน์โหลด** ใน `exportPPTX()` (fileName) และ `exportPDF()` (document.title)
+5. **เปลี่ยนภาพหน้าปก** ที่ `<img class="big-icon" src="...">` (ใช้ไฟล์ PNG/SVG ไม่ใช้ emoji เพื่อไม่แตก)
+6. **เปลี่ยนขนาดสไลด์** ที่ `.deck` + `.slide` (width/height) + `scaleDeck()` + `@media print min-height`
+7. **แก้ exportPPTX()** ให้ตรงกับเนื้อหาใหม่
+8. **แก้ชื่อไฟล์ดาวน์โหลด** ใน `exportPPTX()` (fileName) และ `exportPDF()` (document.title)
 
 ### Prompt สำหรับบอก AI สร้างใหม่
 ```
 สร้างหน้าเว็บ HTML ไฟล์เดียว สไตล์ PowerPoint presentation:
-- ขนาดสไลด์คงที่ 1255x705 px อยู่กลางจอ พื้นดำรอบนอก
+- ขนาดสไลด์คงที่ 1920x1080 px (Full HD) อยู่กลางจอ พื้นดำรอบนอก
 - โทนขาว-เทา สะอาดตา (white/gray theme)
-- ฟอนต์: Noto Sans Thai + Inter จาก Google Fonts
+- ฟอนต์: Sarabun + Inter จาก Google Fonts (คล้าย TH SarabunPSK)
 - มี auto-scale พอดีจอ, Navigation (←→ Space, dots, swipe)
 - มี progress bar, slide counter, fullscreen (F)
 - มี fade-up animation (class="fu") สำหรับ elements
-- มี logo บริษัทมุมบนขวาทุกสไลด์ (class="slide-logo")
+- มี logo บริษัทมุมบนขวาทุกสไลด์ (class="slide-logo", height 110px)
+- ภาพหน้าปกใช้ไฟล์ PNG (ไม่ใช้ emoji เพราะขยายแล้วแตก)
 - มีปุ่ม Download 2 ปุ่มมุมบนขวา:
-  - PPTX: ใช้ PptxGenJS สร้างไฟล์ .pptx จริง
+  - PPTX: ใช้ PptxGenJS สร้างไฟล์ .pptx จริง (fontFace: 'Sarabun')
   - PDF: ใช้ window.print() + @media print CSS จัดหน้าสไลด์ละหน้า landscape
 - เนื้อหา 6 สไลด์:
-  1. Cover (ชื่อระบบ + คำอธิบาย + วันที่ + ไอคอนใหญ่ฝั่งขวา clip-path เฉียง)
-  2. วัตถุประสงค์ (แถวตัวเลขสี 5 ข้อ class="obj")
+  1. Cover (ชื่อระบบ + คำอธิบาย + วันที่ + ภาพ PNG ฝั่งขวา clip-path เฉียง)
+  2. วัตถุประสงค์ (แถวตัวเลขสี 5 ข้อ class="obj" วงกลม 54px)
   3. ผู้ใช้งาน + ประโยชน์ (2 คอลัมน์: user-row ซ้าย, benefit ขวา)
   4. โมดูลส่วน 1 (การ์ด 2x2 มีเส้นสีด้านบน .card.ca/.cg/.co/.cp)
   5. โมดูลส่วน 2 (การ์ด 2x2)
-  6. Timeline แนวนอน จุดต่อจุด สไตล์ขนส่ง (วงกลม + เส้น gradient + legend + tech stack)
+  6. Timeline แนวนอน จุดต่อจุด สไตล์ขนส่ง (วงกลม 64px + เส้น gradient 5px + legend + tech stack)
 ```
 
 ---
@@ -301,11 +308,19 @@ function exportPDF() {
 | ไฟล์ | คำอธิบาย |
 |------|----------|
 | `present.html` | ไฟล์ presentation หลัก |
-| `logo-Biccorp.png` | โลโก้บริษัท (แสดงมุมบนขวาทุกสไลด์) |
+| `logo-Biccorp.png` | โลโก้บริษัท (แสดงมุมบนขวาทุกสไลด์, 110px) |
+| `pig-icon.png` | ภาพหมู 3D หน้าปก (PNG คมชัด ไม่แตกเมื่อขยาย) |
+| `index.html` | หน้าเว็บหลักของโปรเจกต์ |
 | `README.md` | เอกสารนี้ — โครงสร้างและรูปแบบการสร้าง |
 
 ## Dependencies
 
-- **Google Fonts** — Noto Sans Thai, Inter (CDN)
+- **Google Fonts** — Sarabun, Inter (CDN)
 - **PptxGenJS 3.12** — สร้างไฟล์ .pptx ฝั่ง client (CDN)
 - ไม่มี dependency อื่น (Vanilla HTML/CSS/JS)
+
+## หมายเหตุ
+
+- **อย่าใช้ emoji ขนาดใหญ่ในสไลด์** — emoji เป็น bitmap จะแตกเมื่อขยาย ให้ใช้ไฟล์ PNG/SVG แทน
+- **ขนาด 1920x1080** ถูกเลือกเพื่อให้ screenshot/capture ได้ภาพ Full HD คมชัด
+- **ฟอนต์ Sarabun** จาก Google Fonts หน้าตาใกล้เคียง TH SarabunPSK มาก ใช้ได้ทุกเครื่องไม่ต้องติดตั้ง
