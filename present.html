@@ -898,7 +898,7 @@
         <div class="pad" style="padding: 56px 74px">
           <span class="kicker fu">Slide 4/4</span>
           <h2 class="fu" style="margin-bottom: 48px">
-            แผนการดำเนินงานโครงการ — <em>รวม 22 สัปดาห์</em>
+            แผนการดำเนินงานโครงการ — <em>รวม 28 สัปดาห์</em>
           </h2>
 
           <!-- HORIZONTAL TIMELINE -->
@@ -1030,7 +1030,7 @@
                       letter-spacing: 0.5px;
                     "
                   >
-                    WK 3–5
+                    WK 3–6
                   </div>
                   <div
                     style="
@@ -1087,7 +1087,7 @@
                       letter-spacing: 0.5px;
                     "
                   >
-                    WK 6–8
+                    WK 7–10
                   </div>
                   <div
                     style="
@@ -1144,7 +1144,7 @@
                       letter-spacing: 0.5px;
                     "
                   >
-                    WK 9–12
+                    WK 11–15
                   </div>
                   <div
                     style="
@@ -1201,7 +1201,7 @@
                       letter-spacing: 0.5px;
                     "
                   >
-                    WK 13–17
+                    WK 16–22
                   </div>
                   <div
                     style="
@@ -1258,7 +1258,7 @@
                       letter-spacing: 0.5px;
                     "
                   >
-                    WK 18–19
+                    WK 23–25
                   </div>
                   <div
                     style="
@@ -1315,7 +1315,7 @@
                       letter-spacing: 0.5px;
                     "
                   >
-                    WK 20–21
+                    WK 26–27
                   </div>
                   <div
                     style="
@@ -1372,7 +1372,7 @@
                       letter-spacing: 0.5px;
                     "
                   >
-                    WK 22
+                    WK 28
                   </div>
                   <div
                     style="
@@ -1429,7 +1429,7 @@
               ></div>
               <span
                 style="font-size: 16px; font-weight: 600; color: var(--accent)"
-                >Phase 1 — พื้นฐาน (Wk 1–8)</span
+                >Phase 1 — พื้นฐาน (Wk 1–10)</span
               >
             </div>
             <div
@@ -1452,7 +1452,7 @@
               ></div>
               <span
                 style="font-size: 16px; font-weight: 600; color: var(--green)"
-                >Phase 2 — คลัง+ผลิต (Wk 9–17)</span
+                >Phase 2 — คลัง+ผลิต (Wk 11–22)</span
               >
             </div>
             <div
@@ -1475,7 +1475,7 @@
               ></div>
               <span
                 style="font-size: 16px; font-weight: 600; color: var(--orange)"
-                >Phase 3 — ขาย+ซ่อม (Wk 18–21)</span
+                >Phase 3 — ขาย+ซ่อม (Wk 23–27)</span
               >
             </div>
             <div
@@ -1498,7 +1498,7 @@
               ></div>
               <span
                 style="font-size: 16px; font-weight: 600; color: var(--purple)"
-                >Finish — การเงิน (Wk 22)</span
+                >Finish — การเงิน (Wk 28)</span
               >
             </div>
           </div>
@@ -2019,7 +2019,7 @@
 
         // ─── SLIDE 4: Timeline ───
         let s5 = pptx.addSlide();
-        s5.addText('แผนการดำเนินงานโครงการ — รวม 22 สัปดาห์', {
+        s5.addText('แผนการดำเนินงานโครงการ — รวม 28 สัปดาห์', {
           x: 0.6,
           y: 0.3,
           w: 12,
@@ -2048,49 +2048,49 @@
             c: BLUE,
           },
           {
-            wk: 'WK 3–5',
+            wk: 'WK 3–6',
             t: 'Auth+Master',
             d: 'RBAC, Scope\nMaster Data\nFacility Nodes',
             ico: '🔐',
             c: BLUE,
           },
           {
-            wk: 'WK 6–8',
+            wk: 'WK 7–10',
             t: 'Purchase',
             d: 'PR + อนุมัติ\nBuffer\nHardening',
             ico: '🛒',
             c: BLUE,
           },
           {
-            wk: 'WK 9–12',
+            wk: 'WK 11–15',
             t: 'Warehouse',
             d: 'รับ/โอน/เบิก\nLot & Expiry\nTraceability',
             ico: '📦',
             c: GREEN,
           },
           {
-            wk: 'WK 13–17',
+            wk: 'WK 16–22',
             t: 'Production',
             d: 'Batch+Vaccine\nตาย/น้ำหนัก\nแผนวัคซีน',
             ico: '🐷',
             c: GREEN,
           },
           {
-            wk: 'WK 18–19',
+            wk: 'WK 23–25',
             t: 'Sale',
             d: 'SO→Delivery\nชั่ง→Invoice\nDashboard',
             ico: '💰',
             c: ORANGE,
           },
           {
-            wk: 'WK 20–21',
+            wk: 'WK 26–27',
             t: 'Maintenance',
             d: 'แจ้งซ่อม\nWork Order\nเบิกอะไหล่',
             ico: '🔧',
             c: ORANGE,
           },
           {
-            wk: 'WK 22',
+            wk: 'WK 28',
             t: 'Finance',
             d: 'ต้นทุน/กำไร\nปิดรุ่น\n🏁 Go Live',
             ico: '📊',
@@ -2155,10 +2155,10 @@
 
         // Phase legend
         const phases = [
-          { t: 'Phase 1 — พื้นฐาน (Wk 1–8)', c: BLUE },
-          { t: 'Phase 2 — คลัง+ผลิต (Wk 9–17)', c: GREEN },
-          { t: 'Phase 3 — ขาย+ซ่อม (Wk 18–21)', c: ORANGE },
-          { t: 'Finish — การเงิน (Wk 22)', c: PURPLE },
+          { t: 'Phase 1 — พื้นฐาน (Wk 1–10)', c: BLUE },
+          { t: 'Phase 2 — คลัง+ผลิต (Wk 11–22)', c: GREEN },
+          { t: 'Phase 3 — ขาย+ซ่อม (Wk 23–27)', c: ORANGE },
+          { t: 'Finish — การเงิน (Wk 28)', c: PURPLE },
         ];
         phases.forEach((p, i) => {
           const x = 1.5 + i * 2.9;
